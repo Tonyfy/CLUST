@@ -1,0 +1,58 @@
+project(FV)
+cmake_minimum_required(VERSION 2.8)
+
+# add c++11 flags for gcc
+if (CMAKE_COMPILER_IS_GNUCXX)
+    set(ENABLE_CXX11 "-std=c++11")
+    if (GCC_VERSION VERSION_LESS 4.7)
+        set(ENABLE_CXX11 "-std=c++0x")
+    endif()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ENABLE_CXX11}")
+endif()
+
+if(WIN32)
+#    set( CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH} C:\\OpenCV" )
+    set( OpenCV_DIR "C:\\OpenCV\\build" )
+elseif(UNIX)
+    set( OpenCV_DIR "/usr/share/OpenCV" )
+    set( PKG_CONFIG_PATH "/usr/lib/pkgconfig" )
+endif()
+
+set(Boost_USE_STATIC_LIBS OFF) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME OFF) 
+find_package(Boost 1.58.0 COMPONENTS filesystem regex) 
+
+if(Boost_FOUND)
+    message( "Found Boost" )
+    include_directories(${Boost_INCLUDE_DIRS}) 
+    #add_executable(progname file1.cxx file2.cxx) 
+    #target_link_libraries(progname ${Boost_LIBRARIES})
+else()
+    message( "Boost not found, woot" )
+endif()
+
+find_package(OpenCV REQUIRED)
+if( OpenCV_FOUND )
+    message( "Found OpenCV" )
+    message( "Includes: " ${OpenCV_INCLUDE_DIRS} )
+else()
+    message( "OpenCV not found, woot" )
+endif( OpenCV_FOUND )
+
+#set(CAFFE_ROOT $ENV{CAFFE_ROOT})
+set(CAFFE_ROOT "/home/yufei/caffe")
+include_directories(${CAFFE_ROOT}/include)
+set(CAFFE_LIB ${CAFFE_ROOT}/build/lib/libcaffe.so)
+add_definitions(-DCPU_ONLY)
+add_definitions(-DUSE_OPENCV)
+
+file(GLOB HEADERS *.h*)
+file(GLOB SOURCES *.c*)
+set(ALL_FILES ${HEADERS} ${SOURCES})
+
+add_executable(${PROJECT_NAME} ${ALL_FILES})
+
+target_link_libraries(${PROJECT_NAME} glog ${CAFFE_LIB} ${OpenCV_LIBS} ${Boost_LIBRARIES} ${Boost_LIBS})
+
+

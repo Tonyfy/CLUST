@@ -1,0 +1,55 @@
+#ifndef MRECOG_H__
+#define MRECOG_H__
+
+#include <opencv2/objdetect/objdetect.hpp>
+#include "featureExByCaffe.h"
+#include "ARECOG.h"
+#include "faceAlign.hpp"
+#include "caffeFaceVal.h"
+
+class MRECOG :public ARECOG
+{
+public:
+
+	int A_Init(const char *modulepath) override;
+	int A_UnInit() override;
+	int AFaceProcess_Facedetect(const cv::Mat& image, int& list_size,
+		std::vector<ARect> &face_rect_list, int method = 0) override;
+	int AFaceProcess_RotateOneFace(cv::Mat& image,cv::Rect &src_r,cv::Mat& dstImage,cv::Rect& dst_r);
+
+	int EFaceProcess_Getface(cv::Mat& image, cv::Rect& facerect, cv::Mat& face)override;
+
+	int EFaceProcess_GetFeatureParam(int& feature_size) override;
+	int EFaceProcess_GetFaceFeature(cv::Mat& image, cv::Rect& facerect,
+		AFeature& feature) override;
+
+	int AFaceProcess_ReadImage(const std::string &imgpath, cv::Mat& img) override;
+
+	int AFaceProcess_SaveImage(const cv::Mat& img, std::string &savepath) override;
+
+	int AFaceProcess_FreeImage(cv::Mat& image) override;
+
+	int AFaceProcess_FeatureCompare(const AFeature& query_feature,
+		const AFeature& ref_feature, double& similarity)override;
+	
+	int EFaceProcess_GetFaceFeature(cv::Mat& face, AFeature& feature) override;
+	int EFaceProcess_getFacefeature(cv::Mat& face, AFeature& efeature);
+	int compareFace(cv::Mat& queryface, cv::Mat& refface, double& similarity);
+	int cosSimilarity(cv::Mat& q, cv::Mat& r, double& similarity);
+	int ouSimilarity(cv::Mat& q, cv::Mat& r, double& similarity);
+
+
+	int AFaceProcess_Landmark(cv::Mat& gray, cv::Rect& r) override;
+
+public:
+	CascadeClassifier kcc;
+	CascadeClassifier kccp;
+	CaffeFaceValidator *cfv;
+	Landmarker lder;
+	string protonet;
+	string caffemodel;
+	featureExer *fe;
+
+};
+
+#endif //MRECOG_H__
