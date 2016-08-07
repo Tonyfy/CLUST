@@ -1,3 +1,4 @@
-/home/yufei/AlphaRecogAPI/build/CMakeFiles/edit_cache.dir
-/home/yufei/AlphaRecogAPI/build/CMakeFiles/rebuild_cache.dir
-/home/yufei/AlphaRecogAPI/build/CMakeFiles/FV.dir
+D:/SEAL/AlphaRecogAPI/build/CMakeFiles/libcaffe.dir
+D:/SEAL/AlphaRecogAPI/build/CMakeFiles/FV.dir
+D:/SEAL/AlphaRecogAPI/build/CMakeFiles/ALL_BUILD.dir
+D:/SEAL/AlphaRecogAPI/build/CMakeFiles/ZERO_CHECK.dir

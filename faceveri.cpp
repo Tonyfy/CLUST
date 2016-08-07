@@ -23,7 +23,7 @@ int main()
 	string Apicpath = "../imgs/ym1.jpg";
 	string Bpicpath = "../imgs/ym2.jpg";
 
-	string Cpicpath = "../imgs/ym1.jpg";
+	string Cpicpath = "../imgs/ym2.jpg";
 	string Dpicpath = "../imgs/ldh1.jpg";
 	
 	if ((!FileSystem::isExists(Apicpath)) || (!FileSystem::isExists(Bpicpath)) ||
@@ -49,10 +49,10 @@ int main()
 	r->AFaceProcess_Facedetect(Cpic, listsizeC, frlC, 0);
 	r->AFaceProcess_Facedetect(Dpic, listsizeD, frlD, 0);
 
-	showface (Apic,frlA[0].rect);
-	showface (Bpic,frlB[0].rect);
-	showface (Cpic,frlC[0].rect);
-	showface (Dpic,frlD[0].rect);
+	//showface (Apic,frlA[0].rect);
+	//showface (Bpic,frlB[0].rect);
+	//showface (Cpic,frlC[0].rect);
+	//showface (Dpic,frlD[0].rect);
 	cout<<"facenums1,2,3,4 is "<<listsizeA<<" "<<listsizeB<<" "<<listsizeC<<" "<<listsizeD<<endl;
 
 	ARect Aefr, Befr, Cefr, Defr;
@@ -63,11 +63,14 @@ int main()
 	Df.feature=Mat(256,1,CV_32FC1);
 	
 	//double start = cv::getTickCount();
-	//for (int i = 0; i < 1000; i++)
+	//for (int i = 0; i < 1000; )
 	//{
-	//	r->EFaceProcess_GetFaceFeature(*eA, frlA[0], Afeature);
+	//	i++;
+	//	r->AFaceProcess_GetFaceFeature(Apic, frlA[0], Af);
 	//}
 	//double extractf_cost = (cv::getTickCount() - start) / cv::getTickFrequency();
+	//cout << "ave extract cost "<<extractf_cost/1000.0 << endl;
+
 	r->AFaceProcess_GetFaceFeature(Apic, frlA[0], Af);
 
 	r->AFaceProcess_GetFaceFeature(Bpic, frlB[0], Bf);

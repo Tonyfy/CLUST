@@ -51,6 +51,20 @@ int MRECOG::A_UnInit()
 	return 0;
 }
 
+int MRECOG::AFaceProcess_ReadImage(const std::string &imgpath, Mat& img)
+{
+	img = imread(imgpath, 0);
+	return 0;
+}
+
+int MRECOG::AFaceProcess_SaveImage(const Mat& img, std::string &savepath)
+{
+
+	imwrite(savepath, img);
+	return 0;
+}
+
+
 int MRECOG::AFaceProcess_Facedetect(const Mat& image, int& list_size,
 	std::vector<ARect> &face_rect_list, int method)
 {
@@ -201,6 +215,13 @@ int MRECOG::compareFace(Mat& queryface, Mat& refface, double& similarity)
 	
 }
 
+int MRECOG::AFaceProcess_FeatureCompare(const AFeature& query_feature,
+	const AFeature& ref_feature, double& similarity)
+{
+	cosSimilarity(query_feature.feature, ref_feature.feature, similarity);
+	return 0;
+}
+
 int MRECOG::AFaceProcess_GetFaceFeature(Mat& image, ARect& facerect,
 	AFeature& feature)
 {
@@ -211,32 +232,22 @@ int MRECOG::AFaceProcess_GetFaceFeature(Mat& image, ARect& facerect,
 	return 0;
 }
 
-int MRECOG::AFaceProcess_ReadImage(const std::string &imgpath, Mat& img)
-{
-	img = imread(imgpath,0);
-	return 0;
-}
-
-int MRECOG::AFaceProcess_SaveImage(const Mat& img, std::string &savepath)
-{
-
-	imwrite(savepath,img);
-	return 0;
-}
-
-
-int MRECOG::AFaceProcess_FeatureCompare(const AFeature& query_feature,
-	const AFeature& ref_feature, double& similarity)
-{
-	cosSimilarity(query_feature.feature,ref_feature.feature,similarity);
-	return 0;
-}
 
 int MRECOG::AFaceProcess_GetfaceFeature(cv::Mat& face, AFeature &feature)
 {
 	assert(face.type() == CV_8UC1);
 	resize(face, face, cvSize(128, 128));
 	face.convertTo(face, CV_32FC1, 1.0 / 255.0);
+
+	double start = cv::getTickCount();
+	for (int i = 0; i < 1000;)
+	{
+		i++;
+		fe->extractfeature(face, feature.feature);
+	}
+	double extractf_cost = (cv::getTickCount() - start) / cv::getTickFrequency();
+	cout << "ave extract cost " << extractf_cost / 1000.0 << endl;
+
 	fe->extractfeature(face, feature.feature);
 
 	return 0;
@@ -264,22 +275,25 @@ int  MRECOG::AFaceProcess_Landmark(cv::Mat& gray, cv::Rect& r,ARect& ar)
 int MRECOG::AFaceProcess_Getface(cv::Mat& image, ARect& facerect, Mat& face)
 {
 	ARect dst_r;
-	Mat dstimg;
+	Mat dstimg(image.rows,image.cols,image.type());
+	image.copyTo(dstimg);
+	//showimg(image);
 	rotateFaceOrin(image, facerect, dstimg, dst_r);
-	//showEimg(*dstimg);
-	Rect fr_bigface;
+	//showimg(dstimg);
+	ARect fr_bigface;
 	Mat bigface;
-	Rect tmp=dst_r.rect;
-	adjustfaceRect(dstimg, tmp, bigface, fr_bigface);
+	adjustfaceRect(dstimg, dst_r, bigface, fr_bigface);
 	
 	assert(bigface.cols==bigface.rows);
 
 	Rect r; //»ñµÃËùÐèÒªµÄÈËÁ³ÇøÓòÔÚbigfaceÖÐµÄÎ»ÖÃ
 	getNormfaceInbigface(bigface,fr_bigface,r);
 
+	//showimg(bigface);
+
 	Mat tmpface(r.height, r.width, CV_8UC1);
 	bigface(r).copyTo(tmpface); 
-
+	//showimg(tmpface);
 	tmpface.copyTo(face);
 	return 0;
 }
@@ -297,10 +311,10 @@ void MRECOG::rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr
     const double PIE = CV_PI;
     Point A = Point(efr.ld[0].x, efr.ld[0].y);
     Point B = Point(efr.ld[1].x, efr.ld[1].y);
-    double angle = 180 * atan((B.y - A.y) / (double)(B.x - A.x + 1e-12)) / PIE;  //¿¿¿
+    double angle = 180 * atan((B.y - A.y) / (double)(B.x - A.x + 1e-12)) / PIE;  //¿¿?
     double scale = 1.0;
-    double cita = atan((B.y - A.y) / (double)(B.x - A.x + 1e-12));//¿¿¿
-    vector<Point> attr;  //6¿¿¿¿¿¿¿¿¿¿¿
+    double cita = atan((B.y - A.y) / (double)(B.x - A.x + 1e-12));//¿¿?
+    vector<Point> attr;  //6¿¿¿¿¿¿¿¿¿¿?
     attr.push_back(Point(dsttmp.cols * 4 / 18.0, dsttmp.rows * 4 / 18.0));
     attr.push_back(Point(dsttmp.cols * 14 / 18.0, dsttmp.rows * 14 / 18.0));
     attr.push_back(Point(efr.ld[0].x - efr.rect.x + dsttmp.cols * 4 / 18.0, efr.ld[0].y - efr.rect.y + dsttmp.rows * 4 / 18.0));
@@ -326,7 +340,7 @@ void MRECOG::rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr
         {
             cita0 = -1 * PIE - atan((attr[i].y - dsttmp.rows / 2.0) / (attr[i].x - dsttmp.cols / 2.0 + 1e-12));
         }
-        else if (attr[i].x == dsttmp.cols / 2.0)    //¿¿¿y¿
+        else if (attr[i].x == dsttmp.cols / 2.0)    //¿¿¿y?
         {
             if (attr[i].y > dsttmp.rows / 2.0)
             {
@@ -378,17 +392,17 @@ void MRECOG::rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr
     Mat rottmp(dsttmp.rows, dsttmp.cols, dsttmp.type());
     cv::warpAffine(dsttmp, rottmp, rot_mat, dsttmp.size());
     //¿¿¿¿¿¿¿¿,¿¿¿¿¿¿¿¿¿¿¿¿
-    //¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    //¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿?
     int oriW = attr[1].x - attr[0].x;
     int oriH = attr[1].y - attr[0].y;
     int W_H = max(oriW, oriH);
     attr[0].x -= (W_H - oriW) / 2;
     attr[0].y -= (W_H - oriH) / 2;
     attr[1].x += (W_H - oriW) / 2;
-    attr[1].y = attr[0].y + (attr[1].x - attr[0].x); //¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    attr[1].y = attr[0].y + (attr[1].x - attr[0].x); //¿¿¿¿¿¿¿¿¿¿¿¿¿¿?
     assert(attr[1].x - attr[0].x == attr[1].y - attr[0].y);
-    //¿¿¿¿¿¿¿,¿¿bf¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
-    //realposi¿bf¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿bf¿¿¿¿¿¿¿
+    //¿¿¿¿¿¿?¿¿bf¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+    //realposi¿bf¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿bf¿¿¿¿¿¿?
     rottmp(realposi).copyTo(dstimg(bf));
     //showimg(dstimg);
     // Result  ¿¿¿¿¿¿¿¿¿¿¿¿¿¿
@@ -423,3 +437,95 @@ int MRECOG::AFaceProcess_RotateOneFace(Mat& image, ARect &face_rect_list,
     return 0;
 }
 
+
+void MRECOG::adjustfaceRect(Mat& src, ARect &facerect, Mat& bigface, ARect &dst_efr)
+{
+	double eup = 0.60;
+	double eleft = 0.60;
+	double eright = 0.60;
+	double edown = 0.60;
+
+	int width = facerect.rect.width;
+	int height = facerect.rect.height;
+
+	// ¾ØÐÎ¿òÀ©Õ¹ºóµÄµã
+	int left, top, right, bottom;
+	left = facerect.rect.x - width*eleft;
+	top = facerect.rect.y - height*eup;
+	right = facerect.rect.x + width + width*eright;
+	bottom = facerect.rect.y + height + height*edown;
+
+	// Êµ¼ÊÍ¼ÏñÖÐÄÜ¹»À©Õ¹µ½µÄµã
+	int real_left, real_top, real_right, real_bottom;
+	real_left = max(0, left);
+	real_top = max(0, top);
+	real_right = min(right, src.cols - 1);
+	real_bottom = min(bottom, src.rows - 1);
+	// ÐÂÍ¼ÏñÖÐµÄµã
+	int inner_left, inner_top, inner_right, inner_bottom;
+	inner_left = real_left - left;
+	inner_top = real_top - top;
+	inner_right = real_right - left;
+	inner_bottom = real_bottom - top;
+	// ¸´ÖÆÀ©Õ¹ºóÈËÁ³ÇøÓòµ½ÐÂÍ¼Ïñ
+	int rows = bottom - top + 1;
+	int cols = right - left + 1;
+	int RC = min(rows, cols);  //·ÀÖ¹rows cols²î1
+	Mat tmp = Mat::zeros(RC, RC, CV_8UC1);
+	int WH = min(inner_right - inner_left + 1, inner_bottom - inner_top + 1);
+	Rect r1(inner_left, inner_top, WH, WH);
+	Rect r2(real_left, real_top, WH, WH);
+
+	//cout << "m\n" << r2 << endl;
+	//cout << "expanded\n" << r1 << endl;
+	//cout << expanded.size() << endl;
+
+	src(r2).copyTo(tmp(r1));
+	tmp.copyTo(bigface);
+
+	//½«´óÁ³·Å»ØÔ­Í¼,ÓÉÓÚbfÊÇ´óÁ³Êµ¼ÊÄÜÈ¡µ½µÄÔ­Í¼ÖÐµÄÇøÓò£¬
+	//realposiÊÇbfÇøÓòÔÚ´óÁ³ÖÐµÄÎ»ÖÃ£¨µ±Î´³öÏÖÔ½½çÊ±£¬bfºÍ´óÁ³Ò»Ñù´ó£©
+	Rect realposi = r2;
+	Rect bf = r1;
+	//showimg(dstimg);
+	// Result  ´Ó´óÁ³×ø?êÏµ±ä»»µ½Ô­Í¼×ø±êÏ?
+	int x_shift = bf.x - realposi.x;
+	int y_shift = bf.y - realposi.y;
+
+
+	dst_efr.rect.x = facerect.rect.x + x_shift;
+	dst_efr.rect.y = facerect.rect.y + y_shift;
+	dst_efr.rect.width = facerect.rect.width;
+	dst_efr.rect.height = facerect.rect.height;
+	//x_shiftºÍy_shift¿ÉÄÜ²»Í¬¡£ÐèÒªÔÙ´Î±äÎªÕý·½ÐÎ
+	int W_H2 = max(dst_efr.rect.width, dst_efr.rect.height);
+	dst_efr.rect.x -= (W_H2 - dst_efr.rect.width) / 2;
+	dst_efr.rect.y -= (W_H2 - dst_efr.rect.height) / 2;
+	dst_efr.rect.width += (W_H2 - dst_efr.rect.width);
+	dst_efr.rect.height = dst_efr.rect.width;  //Ç¿ÖÆ±ä³ÉÕý·½ÐÎ
+
+	dst_efr.ld.clear();
+	dst_efr.ld.push_back(Point(facerect.ld[0].x + x_shift, facerect.ld[0].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[1].x + x_shift, facerect.ld[1].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[2].x + x_shift, facerect.ld[2].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[3].x + x_shift, facerect.ld[3].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[4].x + x_shift, facerect.ld[4].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[5].x + x_shift, facerect.ld[5].y + y_shift));
+
+	dst_efr.face_score = facerect.face_score;
+
+}
+
+void MRECOG::getNormfaceInbigface(Mat& bigface, ARect &efr, Rect &r)
+{
+	//showEface(bigface, efr);
+	//¹éÒ»»¯µ½ÐèÒªµÄ´óÐ¡ºÍÎ»ÖÃ 
+	int ec_y = efr.ld[0].y;
+	int ec_mc_y = efr.ld[5].y - ec_y;
+
+	int newWH = (int)(ec_mc_y*(1 + 80 / 48.0));
+	r.width = newWH;
+	r.height = newWH;
+	r.y = efr.ld[0].y - ec_mc_y * 40 / 48.0;
+	r.x = (bigface.cols - r.width) / 2;
+}

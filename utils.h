@@ -10,8 +10,6 @@ void showface(cv::Mat& img, cv::Rect &r);
 
 void showLandmarks(cv::Mat& image, cv::Rect& bbox, std::vector<cv::Point2f> &landmarks);
 void ExpandRect(const cv::Mat& src, cv::Mat& dst, cv::Rect& rect, cv::Rect& realPosi, cv::Rect& posiInbf);
-void adjustfaceRect(cv::Mat& src,cv::Rect& facerect,cv::Mat& bigface,cv::Rect& dst_efr);
-void getNormfaceInbigface(cv::Mat& bigface,cv::Rect& efr,cv::Rect& r);
 int cosSimilarity(const cv::Mat& q, const cv::Mat& r, double& similarity);
 int ouSimilarity(const cv::Mat& q, const cv::Mat& r, double& similarity);
 
