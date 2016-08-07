@@ -9,7 +9,6 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/yufei/AlphaRecogAPI/faceAlign.cpp" "/home/yufei/AlphaRecogAPI/build/CMakeFiles/FV.dir/faceAlign.cpp.o"
   "/home/yufei/AlphaRecogAPI/faceveri.cpp" "/home/yufei/AlphaRecogAPI/build/CMakeFiles/FV.dir/faceveri.cpp.o"
   "/home/yufei/AlphaRecogAPI/filesystem.cpp" "/home/yufei/AlphaRecogAPI/build/CMakeFiles/FV.dir/filesystem.cpp.o"
-  "/home/yufei/AlphaRecogAPI/template.cpp" "/home/yufei/AlphaRecogAPI/build/CMakeFiles/FV.dir/template.cpp.o"
   "/home/yufei/AlphaRecogAPI/utils.cpp" "/home/yufei/AlphaRecogAPI/build/CMakeFiles/FV.dir/utils.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

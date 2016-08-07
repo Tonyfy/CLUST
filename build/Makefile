@@ -258,33 +258,6 @@ filesystem.cpp.s:
 	$(MAKE) -f CMakeFiles/FV.dir/build.make CMakeFiles/FV.dir/filesystem.cpp.s
 .PHONY : filesystem.cpp.s
 
-template.o: template.cpp.o
-
-.PHONY : template.o
-
-# target to build an object file
-template.cpp.o:
-	$(MAKE) -f CMakeFiles/FV.dir/build.make CMakeFiles/FV.dir/template.cpp.o
-.PHONY : template.cpp.o
-
-template.i: template.cpp.i
-
-.PHONY : template.i
-
-# target to preprocess a source file
-template.cpp.i:
-	$(MAKE) -f CMakeFiles/FV.dir/build.make CMakeFiles/FV.dir/template.cpp.i
-.PHONY : template.cpp.i
-
-template.s: template.cpp.s
-
-.PHONY : template.s
-
-# target to generate assembly for a file
-template.cpp.s:
-	$(MAKE) -f CMakeFiles/FV.dir/build.make CMakeFiles/FV.dir/template.cpp.s
-.PHONY : template.cpp.s
-
 utils.o: utils.cpp.o
 
 .PHONY : utils.o
@@ -336,9 +309,6 @@ help:
 	@echo "... filesystem.o"
 	@echo "... filesystem.i"
 	@echo "... filesystem.s"
-	@echo "... template.o"
-	@echo "... template.i"
-	@echo "... template.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

@@ -1,7 +1,9 @@
+#include <iostream>
 #include "utils.h"
 #include "MRECOG.h"
-
-void showimg(cv::Mat &img)
+using namespace cv;
+using namespace std;
+void showimg(Mat &img)
 {
 	cv::imshow("img", img);
 	cv::waitKey(0);
@@ -16,7 +18,7 @@ void showAface(Mat& img, ARect& r)
 
 	circle(img3ch, Point(r.rect.x, r.rect.y), 2, Scalar(0, 255, 0), -1);
 	circle(img3ch, Point(r.rect.x+r.rect.width-1, r.rect.y+r.rect.height-1), 2, Scalar(0, 255, 0), -1);
-	for (int i = 0; i < r.ld.size(); i++)   //»­³öĞÎ×´
+	for (int i = 0; i < r.ld.size(); i++)   //ç”»å‡ºå½¢çŠ¶
 	{
 		circle(img3ch, r.ld[i], 2, Scalar(0, 255, 0), -1);
 	}
@@ -43,117 +45,26 @@ void showLandmarks(cv::Mat& image, Rect& bbox, vector<Point2f>& landmarks)
 	showimg(img);
 }
 
-void adjustfaceRect(Mat& src, ARect &facerect, Mat& bigface, ARect &dst_efr)
-{
-	double eup = 0.60;
-	double eleft = 0.60;
-	double eright = 0.60;
-	double edown = 0.60;
-
-	int width = facerect.rect.width;
-	int height = facerect.rect.height;
-
-	// ¾ØĞÎ¿òÀ©Õ¹ºóµÄµã
-	int left, top, right, bottom;
-	left = facerect.rect.x - width*eleft;
-	top = facerect.rect.y - height*eup;
-	right = facerect.rect.x + width + width*eright;
-	bottom = facerect.rect.y + height + height*edown;
-
-	// Êµ¼ÊÍ¼ÏñÖĞÄÜ¹»À©Õ¹µ½µÄµã
-	int real_left, real_top, real_right, real_bottom;
-	real_left = max(0, left);
-	real_top = max(0, top);
-	real_right = min(right, src.cols - 1);
-	real_bottom = min(bottom, src.rows - 1);
-	// ĞÂÍ¼ÏñÖĞµÄµã
-	int inner_left, inner_top, inner_right, inner_bottom;
-	inner_left = real_left - left;
-	inner_top = real_top - top;
-	inner_right = real_right - left;
-	inner_bottom = real_bottom - top;
-	// ¸´ÖÆÀ©Õ¹ºóÈËÁ³ÇøÓòµ½ĞÂÍ¼Ïñ
-	int rows = bottom - top + 1;
-	int cols = right - left + 1;
-	int RC = min(rows, cols);  //·ÀÖ¹rows cols²î1
-	Mat tmp = Mat::zeros(RC, RC, CV_8UC1);
-	int WH = min(inner_right - inner_left + 1, inner_bottom - inner_top + 1);
-	Rect r1(inner_left, inner_top, WH, WH);
-	Rect r2(real_left, real_top, WH, WH);
-
-	//cout << "m\n" << r2 << endl;
-	//cout << "expanded\n" << r1 << endl;
-	//cout << expanded.size() << endl;
-
-	src(r2).copyTo(tmp(r1));
-	tmp.copyTo(bigface);
-
-	//½«´óÁ³·Å»ØÔ­Í¼,ÓÉÓÚbfÊÇ´óÁ³Êµ¼ÊÄÜÈ¡µ½µÄÔ­Í¼ÖĞµÄÇøÓò£¬
-	//realposiÊÇbfÇøÓòÔÚ´óÁ³ÖĞµÄÎ»ÖÃ£¨µ±Î´³öÏÖÔ½½çÊ±£¬bfºÍ´óÁ³Ò»Ñù´ó£©
-	Rect realposi = r2;
-	Rect bf = r1;
-	//showimg(dstimg);
-	// Result  ´Ó´óÁ³×ø?êÏµ±ä»»µ½Ô­Í¼×ø±êÏ?
-	int x_shift = bf.x - realposi.x;
-	int y_shift = bf.y - realposi.y;
-
-
-	dst_efr.rect.x = facerect.rect.x + x_shift;
-	dst_efr.rect.y = facerect.rect.y + y_shift;
-	dst_efr.rect.width = facerect.rect.width;
-	dst_efr.rect.height = facerect.rect.height;
-	//x_shiftºÍy_shift¿ÉÄÜ²»Í¬¡£ĞèÒªÔÙ´Î±äÎªÕı·½ĞÎ
-	int W_H2 = max(dst_efr.rect.width, dst_efr.rect.height);
-	dst_efr.rect.x -= (W_H2 - dst_efr.rect.width) / 2;
-	dst_efr.rect.y -= (W_H2 - dst_efr.rect.height) / 2;
-	dst_efr.rect.width +=  (W_H2 - dst_efr.rect.width);
-	dst_efr.rect.height = dst_efr.rect.width;  //Ç¿ÖÆ±ä³ÉÕı·½ĞÎ
-
-	dst_efr.ld.clear();
-	dst_efr.ld.push_back(Point(facerect.ld[0].x + x_shift,facerect.ld[0].y + y_shift));
-	dst_efr.ld.push_back(Point(facerect.ld[1].x + x_shift,facerect.ld[1].y + y_shift));
-	dst_efr.ld.push_back(Point(facerect.ld[2].x + x_shift,facerect.ld[2].y + y_shift));
-	dst_efr.ld.push_back(Point(facerect.ld[3].x + x_shift,facerect.ld[3].y + y_shift));
-	dst_efr.ld.push_back(Point(facerect.ld[4].x + x_shift,facerect.ld[4].y + y_shift));
-	dst_efr.ld.push_back(Point(facerect.ld[5].x + x_shift,facerect.ld[5].y + y_shift));
-	
-	dst_efr.face_score = facerect.face_score;
-
-}
-
-void getNormfaceInbigface(Mat& bigface, ARect &efr, Rect &r)
-{
-	//showEface(bigface, efr);
-	//¹éÒ»»¯µ½ĞèÒªµÄ´óĞ¡ºÍÎ»ÖÃ
-	int ec_y = efr.rect.y;
-	int ec_mc_y = efr.ld[5].y - ec_y;
-
-	int newWH = (int)(ec_mc_y*(1 + 80 / 48.0));
-	r.width = newWH;
-	r.height = newWH;
-	r.y = efr.ld[0].y - ec_mc_y * 40 / 48.0;
-	r.x = (bigface.cols - r.width) / 2;
-}
 
 void rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr)
 {
 	assert((dstimg.rows == srcimg.rows) && (dstimg.cols == srcimg.cols) && (dstimg.type() == srcimg.type()));
 
 	Mat dsttmp;
-	Rect bf;   //¼ÇÂ¼´óÁ³dsttmpÊµ¼ÊÈ¡µ½µÄÎ»ÖÃrealgetR
+	Rect bf;   //è®°å½•å¤§è„¸dsttmpå®é™…å–åˆ°çš„ä½ç½®realgetR
 	Rect realposi;
-	ExpandRect(srcimg, dsttmp, efr.rect, bf, realposi);  //½«Ô­ÈËÁ³ÇøÓòfrectÀ©Õ¹20%£¬µÃµ½dsttmp´óÁ³£¬ÔÚdsttmpÉÏ½øĞĞĞı×ª¡£
+	ExpandRect(srcimg, dsttmp, efr.rect, bf, realposi);  //å°†åŸäººè„¸åŒºåŸŸfrectæ‰©å±•20%ï¼Œå¾—åˆ°dsttmpå¤§è„¸ï¼Œåœ¨dsttmpä¸Šè¿›è¡Œæ—‹è½¬ã€‚
 	//showimg(dsttmp);
 
 	const double PIE = CV_PI;
 	Point A = Point(efr.ld[0].x, efr.ld[0].y);
 	Point B = Point(efr.ld[1].x, efr.ld[1].y);
 
-	double angle = 180 * atan((B.y - A.y) / (double)(B.x - A.x + 1e-12)) / PIE;  //½Ç¶ÈÖÆ
+	double angle = 180 * atan((B.y - A.y) / (double)(B.x - A.x + 1e-12)) / PIE;  //è§’åº¦åˆ¶
 	double scale = 1.0;
-	double cita = atan((B.y - A.y) / (double)(B.x - A.x + 1e-12));//»¡¶ÈÖÆ
+	double cita = atan((B.y - A.y) / (double)(B.x - A.x + 1e-12));//å¼§åº¦åˆ¶
 
-	vector<Point> attr;  //6¸öÊôĞÔµãÔÚ´óÁ³ÖĞµÄ×ø±ê
+	vector<Point> attr;  //6ä¸ªå±æ€§ç‚¹åœ¨å¤§è„¸ä¸­çš„åæ ‡
 	attr.push_back(Point(dsttmp.cols * 4 / 18.0, dsttmp.rows * 4 / 18.0));
 	attr.push_back(Point(dsttmp.cols * 14 / 18.0, dsttmp.rows * 14 / 18.0));
 	attr.push_back(Point(efr.ld[0].x - efr.rect.x + dsttmp.cols * 4 / 18.0, efr.ld[0].y - efr.rect.y + dsttmp.rows * 4 / 18.0));
@@ -163,24 +74,24 @@ void rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr)
 	attr.push_back(Point(efr.ld[4].x - efr.rect.x + dsttmp.cols * 4 / 18.0, efr.ld[4].y - efr.rect.y + dsttmp.rows * 4 / 18.0));
 	attr.push_back(Point(efr.ld[5].x - efr.rect.x + dsttmp.cols * 4 / 18.0, efr.ld[5].y - efr.rect.y + dsttmp.rows * 4 / 18.0));  //centermouth
 
-	for (int i = 0; i < attr.size(); i++)   //×ª´æµ½Ğı×ªºóµÄĞÎ×´pA2
+	for (int i = 0; i < attr.size(); i++)   //è½¬å­˜åˆ°æ—‹è½¬åçš„å½¢çŠ¶pA2
 	{
 		double dis = (double)sqrt(pow((double)attr[i].x - dsttmp.cols / 2.0, 2)
 			+ pow((double)attr[i].y - dsttmp.rows / 2.0, 2));
 		double cita0;
-		if (attr[i].x > dsttmp.cols / 2.0)  //1,4ÏóÏŞ
+		if (attr[i].x > dsttmp.cols / 2.0)  //1,4è±¡é™
 		{
 			cita0 = -atan((double)(attr[i].y - dsttmp.rows / 2.0) / (attr[i].x - dsttmp.cols / 2.0 + 1e-12));
 		}
-		else if ((attr[i].x < dsttmp.cols / 2.0) && (attr[i].y <= dsttmp.rows / 2.0)) //2ÏóÏŞ
+		else if ((attr[i].x < dsttmp.cols / 2.0) && (attr[i].y <= dsttmp.rows / 2.0)) //2è±¡é™
 		{
 			cita0 = PIE - atan((attr[i].y - dsttmp.rows / 2.0) / (attr[i].x - dsttmp.cols / 2.0 + 1e-12));
 		}
-		else if ((attr[i].x < dsttmp.cols / 2.0) && (attr[i].y > dsttmp.rows / 2.0))  //3ÏóÏŞ
+		else if ((attr[i].x < dsttmp.cols / 2.0) && (attr[i].y > dsttmp.rows / 2.0))  //3è±¡é™
 		{
 			cita0 = -1 * PIE - atan((attr[i].y - dsttmp.rows / 2.0) / (attr[i].x - dsttmp.cols / 2.0 + 1e-12));
 		}
-		else if (attr[i].x == dsttmp.cols / 2.0)    //´¹Ö±ÓÚyÖá
+		else if (attr[i].x == dsttmp.cols / 2.0)    //å‚ç›´äºyè½´
 		{
 			if (attr[i].y > dsttmp.rows / 2.0)
 			{
@@ -234,8 +145,8 @@ void rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr)
 	Mat rottmp(dsttmp.rows, dsttmp.cols, dsttmp.type());
 	cv::warpAffine(dsttmp, rottmp, rot_mat, dsttmp.size());
 
-	//ÔÚ´óÁ³ÉÏÍê³ÉĞı×ª,¹Û²âĞı×ªºó¸÷ĞÅÏ¢ÊÇ·ñÕıÈ·
-	//ÓÉÓÚĞı×ªºó£¬ÈËÁ³¿òµÄ×óÉÏºÍÓÒÏÂÁ½µã·¢Éú±ä»¯£¬»á±ä³ÉÒ»¸ö³¤·½ĞÎ¡£Òª½«ÆäÍØ¿íÎªÕı·½ĞÎ¡£
+	//åœ¨å¤§è„¸ä¸Šå®Œæˆæ—‹è½¬,è§‚æµ‹æ—‹è½¬åå„ä¿¡æ¯æ˜¯å¦æ­£ç¡®
+	//ç”±äºæ—‹è½¬åï¼Œäººè„¸æ¡†çš„å·¦ä¸Šå’Œå³ä¸‹ä¸¤ç‚¹å‘ç”Ÿå˜åŒ–ï¼Œä¼šå˜æˆä¸€ä¸ªé•¿æ–¹å½¢ã€‚è¦å°†å…¶æ‹“å®½ä¸ºæ­£æ–¹å½¢ã€‚
 	int oriW = attr[1].x - attr[0].x;
 	int oriH = attr[1].y - attr[0].y;
 	int W_H = max(oriW, oriH);
@@ -243,15 +154,15 @@ void rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr)
 	attr[0].x -= (W_H - oriW) / 2;
 	attr[0].y -= (W_H - oriH) / 2;
 	attr[1].x += (W_H - oriW) / 2;
-	attr[1].y = attr[0].y + (attr[1].x - attr[0].x); //Ç¿ÖÆÊ¹×óÉÏºÍÓÒÏÂÖ®¼ä¹¹³ÉÕı·½ĞÎ
+	attr[1].y = attr[0].y + (attr[1].x - attr[0].x); //å¼ºåˆ¶ä½¿å·¦ä¸Šå’Œå³ä¸‹ä¹‹é—´æ„æˆæ­£æ–¹å½¢
 	assert(attr[1].x - attr[0].x == attr[1].y - attr[0].y);
 
-	//½«´óÁ³·Å»ØÔ­Í¼,ÓÉÓÚbfÊÇ´óÁ³Êµ¼ÊÄÜÈ¡µ½µÄÔ­Í¼ÖĞµÄÇøÓò£¬
-	//realposiÊÇbfÇøÓòÔÚ´óÁ³ÖĞµÄÎ»ÖÃ£¨µ±Î´³öÏÖÔ½½çÊ±£¬bfºÍ´óÁ³Ò»Ñù´ó£©
+	//å°†å¤§è„¸æ”¾å›åŸå›¾,ç”±äºbfæ˜¯å¤§è„¸å®é™…èƒ½å–åˆ°çš„åŸå›¾ä¸­çš„åŒºåŸŸï¼Œ
+	//realposiæ˜¯bfåŒºåŸŸåœ¨å¤§è„¸ä¸­çš„ä½ç½®ï¼ˆå½“æœªå‡ºç°è¶Šç•Œæ—¶ï¼Œbfå’Œå¤§è„¸ä¸€æ ·å¤§ï¼‰
 	rottmp(realposi).copyTo(dstimg(bf));
 
 	//showimg(dstimg);
-	// Result  ´Ó´óÁ³×ø±êÏµ±ä»»µ½Ô­Í¼×ø±êÏµ
+	// Result  ä»å¤§è„¸åæ ‡ç³»å˜æ¢åˆ°åŸå›¾åæ ‡ç³»
 	int x_shift = bf.x - realposi.x;
 	int y_shift = bf.y - realposi.y;
 
@@ -260,7 +171,7 @@ void rotateFaceOrin(Mat &srcimg, ARect &efr, Mat &dstimg, ARect &dst_efr)
 	dst_efr.rect.y = attr[0].y + y_shift;
 	dst_efr.rect.width = attr[1].x - attr[0].x;
 	dst_efr.rect.height = attr[1].y - attr[0].y;
-	//x_shiftºÍy_shift¿ÉÄÜ²»Í¬¡£ĞèÒªÔÙ´Î±äÎªÕı·½ĞÎ
+	//x_shiftå’Œy_shiftå¯èƒ½ä¸åŒã€‚éœ€è¦å†æ¬¡å˜ä¸ºæ­£æ–¹å½¢
 	int W_H2 = max(dst_efr.rect.width, dst_efr.rect.height);
 	
 	dst_efr.rect.x -= (W_H2 - dst_efr.rect.width) / 2;
@@ -292,7 +203,7 @@ int AFaceProcess_RotateOneFace(Mat& image, ARect &face_rect_list,
 void ExpandRect(const Mat& src, Mat& dst, Rect& rect, Rect &realPosi, Rect &posiInbf)
 {
 
-	// ¹éÒ»»¯ÈËÁ³ºÍ¾ØĞÎ¿ò
+	// å½’ä¸€åŒ–äººè„¸å’ŒçŸ©å½¢æ¡†
 	const Mat& m = src;
 	Mat expanded;
 	Mat tmp;
@@ -304,25 +215,25 @@ void ExpandRect(const Mat& src, Mat& dst, Rect& rect, Rect &realPosi, Rect &posi
 	const double kPercentX = 0.4;
 	const double kPercentY = 0.4;
 
-	// ¾ØĞÎ¿òÀ©Õ¹ºóµÄµã
+	// çŸ©å½¢æ¡†æ‰©å±•åçš„ç‚¹
 	int left, top, right, bottom;
 	left = rect.x - rect.width*kPercentX;
 	top = rect.y - rect.height*kPercentY;
 	right = rect.x + rect.width + rect.width*kPercentX;
 	bottom = rect.y + rect.height + rect.height*kPercentY;
-	// Êµ¼ÊÍ¼ÏñÖĞÄÜ¹»À©Õ¹µ½µÄµã
+	// å®é™…å›¾åƒä¸­èƒ½å¤Ÿæ‰©å±•åˆ°çš„ç‚¹
 	int real_left, real_top, real_right, real_bottom;
 	real_left = max(0, left);
 	real_top = max(0, top);
 	real_right = min(right, m.cols - 1);
 	real_bottom = min(bottom, m.rows - 1);
-	// ĞÂÍ¼ÏñÖĞµÄµã
+	// æ–°å›¾åƒä¸­çš„ç‚¹
 	int inner_left, inner_top, inner_right, inner_bottom;
 	inner_left = real_left - left;
 	inner_top = real_top - top;
 	inner_right = real_right - left;
 	inner_bottom = real_bottom - top;
-	// ¸´ÖÆÀ©Õ¹ºóÈËÁ³ÇøÓòµ½ĞÂÍ¼Ïñ
+	// å¤åˆ¶æ‰©å±•åäººè„¸åŒºåŸŸåˆ°æ–°å›¾åƒ
 	int rows = bottom - top + 1;
 	int cols = right - left + 1;
 	expanded = Mat::zeros(rows, cols, m.type());
@@ -338,5 +249,112 @@ void ExpandRect(const Mat& src, Mat& dst, Rect& rect, Rect &realPosi, Rect &posi
 	dst = expanded;
 	realPosi = r2;
 	posiInbf = r1;
+}
+
+
+void adjustfaceRect(Mat& src, ARect &facerect, Mat& bigface, ARect &dst_efr)
+{
+	double eup = 0.60;
+	double eleft = 0.60;
+	double eright = 0.60;
+	double edown = 0.60;
+
+	int width = facerect.rect.width;
+	int height = facerect.rect.height;
+
+	// çŸ©å½¢æ¡†æ‰©å±•åçš„ç‚¹
+	int left, top, right, bottom;
+	left = facerect.rect.x - width*eleft;
+	top = facerect.rect.y - height*eup;
+	right = facerect.rect.x + width + width*eright;
+	bottom = facerect.rect.y + height + height*edown;
+
+	// å®é™…å›¾åƒä¸­èƒ½å¤Ÿæ‰©å±•åˆ°çš„ç‚¹
+	int real_left, real_top, real_right, real_bottom;
+	real_left = max(0, left);
+	real_top = max(0, top);
+	real_right = min(right, src.cols - 1);
+	real_bottom = min(bottom, src.rows - 1);
+	// æ–°å›¾åƒä¸­çš„ç‚¹
+	int inner_left, inner_top, inner_right, inner_bottom;
+	inner_left = real_left - left;
+	inner_top = real_top - top;
+	inner_right = real_right - left;
+	inner_bottom = real_bottom - top;
+	// å¤åˆ¶æ‰©å±•åäººè„¸åŒºåŸŸåˆ°æ–°å›¾åƒ
+	int rows = bottom - top + 1;
+	int cols = right - left + 1;
+	int RC = min(rows, cols);  //é˜²æ­¢rows colså·®1
+	Mat tmp = Mat::zeros(RC, RC, CV_8UC1);
+	int WH = min(inner_right - inner_left + 1, inner_bottom - inner_top + 1);
+	Rect r1(inner_left, inner_top, WH, WH);
+	Rect r2(real_left, real_top, WH, WH);
+
+	//cout << "m\n" << r2 << endl;
+	//cout << "expanded\n" << r1 << endl;
+	//cout << expanded.size() << endl;
+
+	src(r2).copyTo(tmp(r1));
+	tmp.copyTo(bigface);
+
+	//å°†å¤§è„¸æ”¾å›åŸå›¾,ç”±äºbfæ˜¯å¤§è„¸å®é™…èƒ½å–åˆ°çš„åŸå›¾ä¸­çš„åŒºåŸŸï¼Œ
+	//realposiæ˜¯bfåŒºåŸŸåœ¨å¤§è„¸ä¸­çš„ä½ç½®ï¼ˆå½“æœªå‡ºç°è¶Šç•Œæ—¶ï¼Œbfå’Œå¤§è„¸ä¸€æ ·å¤§ï¼‰
+	Rect realposi = r2;
+	Rect bf = r1;
+	//showimg(dstimg);
+	// Result  ä»å¤§è„¸å?æ™—å½“æµ åçš†î…†ç”²î‰„æ™—?
+	int x_shift = bf.x - realposi.x;
+	int y_shift = bf.y - realposi.y;
+
+
+	dst_efr.rect.x = facerect.rect.x + x_shift;
+	dst_efr.rect.y = facerect.rect.y + y_shift;
+	dst_efr.rect.width = facerect.rect.width;
+	dst_efr.rect.height = facerect.rect.height;
+	//x_shiftå’Œy_shiftå¯èƒ½ä¸åŒã€‚éœ€è¦å†æ¬¡å˜ä¸ºæ­£æ–¹å½¢
+	int W_H2 = max(dst_efr.rect.width, dst_efr.rect.height);
+	dst_efr.rect.x -= (W_H2 - dst_efr.rect.width) / 2;
+	dst_efr.rect.y -= (W_H2 - dst_efr.rect.height) / 2;
+	dst_efr.rect.width +=  (W_H2 - dst_efr.rect.width);
+	dst_efr.rect.height = dst_efr.rect.width;  //å¼ºåˆ¶å˜æˆæ­£æ–¹å½¢
+
+	dst_efr.ld.clear();
+	dst_efr.ld.push_back(Point(facerect.ld[0].x + x_shift,facerect.ld[0].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[1].x + x_shift,facerect.ld[1].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[2].x + x_shift,facerect.ld[2].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[3].x + x_shift,facerect.ld[3].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[4].x + x_shift,facerect.ld[4].y + y_shift));
+	dst_efr.ld.push_back(Point(facerect.ld[5].x + x_shift,facerect.ld[5].y + y_shift));
+	
+	dst_efr.face_score = facerect.face_score;
+
+}
+
+void getNormfaceInbigface(Mat& bigface, ARect &efr, Rect &r)
+{
+	//showEface(bigface, efr);
+	//å½’ä¸€åŒ–åˆ°éœ€è¦çš„å¤§å°å’Œä½ç½®
+	int ec_y = efr.rect.y;
+	int ec_mc_y = efr.ld[5].y - ec_y;
+
+	int newWH = (int)(ec_mc_y*(1 + 80 / 48.0));
+	r.width = newWH;
+	r.height = newWH;
+	r.y = efr.ld[0].y - ec_mc_y * 40 / 48.0;
+	r.x = (bigface.cols - r.width) / 2;
+}
+int cosSimilarity(const Mat& q, const Mat& r, double& similarity)
+{
+    assert((q.rows==r.rows)&&(q.cols==r.cols));
+    double fenzi = q.dot(r);
+    double fenmu = sqrt(q.dot(q)) * sqrt(r.dot(r));
+    similarity = fenzi/fenmu;
+    return 0;
+}
+int ouSimilarity(const Mat& q, const Mat& r, double& similarity)
+{
+    assert((q.rows==r.rows)&&(q.cols==r.cols));
+    similarity = (q - r).dot(q - r)/((q.dot(q))*(r.dot(r)));
+    return 0;
 }
 

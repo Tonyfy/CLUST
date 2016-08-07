@@ -13,14 +13,16 @@ opencv2/core/core.hpp
 -
 opencv2/highgui/highgui.hpp
 -
+opencv2/imgproc/imgproc.hpp
+-
 
 /home/yufei/AlphaRecogAPI/MRECOG.cpp
 MRECOG.h
 /home/yufei/AlphaRecogAPI/MRECOG.h
-common.h
-/home/yufei/AlphaRecogAPI/common.h
 utils.h
 /home/yufei/AlphaRecogAPI/utils.h
+filesystem.h
+/home/yufei/AlphaRecogAPI/filesystem.h
 
 /home/yufei/AlphaRecogAPI/MRECOG.h
 opencv2/objdetect/objdetect.hpp
@@ -101,12 +103,8 @@ cassert
 -
 caffe/caffe.hpp
 -
-boost/algorithm/string.hpp
--
 featureExByCaffe.h
 /home/yufei/AlphaRecogAPI/featureExByCaffe.h
-filesystem.h
-/home/yufei/AlphaRecogAPI/filesystem.h
 iostream
 -
 opencv2/core/core.hpp
@@ -115,12 +113,12 @@ opencv2/highgui/highgui.hpp
 -
 opencv2/imgproc/imgproc.hpp
 -
-ARECOG.h
-/home/yufei/AlphaRecogAPI/ARECOG.h
-MRECOG.h
-/home/yufei/AlphaRecogAPI/MRECOG.h
 utils.h
 /home/yufei/AlphaRecogAPI/utils.h
+MRECOG.h
+/home/yufei/AlphaRecogAPI/MRECOG.h
+filesystem.h
+/home/yufei/AlphaRecogAPI/filesystem.h
 
 /home/yufei/AlphaRecogAPI/featureExByCaffe.h
 vector
@@ -162,19 +160,9 @@ string
 vector
 -
 
-/home/yufei/AlphaRecogAPI/template.cpp
+/home/yufei/AlphaRecogAPI/utils.cpp
 iostream
 -
-template.h
-/home/yufei/AlphaRecogAPI/template.h
-
-/home/yufei/AlphaRecogAPI/template.h
-vector
--
-opencv2/core/core.hpp
--
-
-/home/yufei/AlphaRecogAPI/utils.cpp
 utils.h
 /home/yufei/AlphaRecogAPI/utils.h
 MRECOG.h
@@ -187,10 +175,6 @@ opencv2/highgui/highgui.hpp
 -
 opencv2/imgproc/imgproc.hpp
 -
-ARECOG.h
-/home/yufei/AlphaRecogAPI/ARECOG.h
-filesystem.h
-/home/yufei/AlphaRecogAPI/filesystem.h
 
 /home/yufei/caffe/include/caffe/blob.hpp
 algorithm

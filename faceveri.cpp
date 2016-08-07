@@ -1,20 +1,17 @@
 #include <cassert>
 #include <caffe/caffe.hpp>
-#include <boost/algorithm/string.hpp>
 #include "featureExByCaffe.h"
-#include "filesystem.h"
 #include <iostream>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-#include "ARECOG.h"
-#include "MRECOG.h"
 #include "utils.h"
+#include "MRECOG.h"
+#include "filesystem.h"
 
 using namespace cv;
 using namespace std;
 using namespace caffe;
-using namespace boost::algorithm;
 int main()
 {
 	google::InitGoogleLogging(" ");

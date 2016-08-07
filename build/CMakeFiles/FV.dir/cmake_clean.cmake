@@ -4,7 +4,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/FV.dir/filesystem.cpp.o"
   "CMakeFiles/FV.dir/faceAlign.cpp.o"
   "CMakeFiles/FV.dir/utils.cpp.o"
-  "CMakeFiles/FV.dir/template.cpp.o"
   "CMakeFiles/FV.dir/MRECOG.cpp.o"
   "FV.pdb"
   "FV"

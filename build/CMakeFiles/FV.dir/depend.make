@@ -5,7 +5,6 @@ CMakeFiles/FV.dir/MRECOG.cpp.o: ../ARECOG.h
 CMakeFiles/FV.dir/MRECOG.cpp.o: ../MRECOG.cpp
 CMakeFiles/FV.dir/MRECOG.cpp.o: ../MRECOG.h
 CMakeFiles/FV.dir/MRECOG.cpp.o: ../caffeFaceVal.h
-CMakeFiles/FV.dir/MRECOG.cpp.o: ../common.h
 CMakeFiles/FV.dir/MRECOG.cpp.o: ../faceAlign.h
 CMakeFiles/FV.dir/MRECOG.cpp.o: ../featureExByCaffe.h
 CMakeFiles/FV.dir/MRECOG.cpp.o: ../filesystem.h
@@ -96,15 +95,11 @@ CMakeFiles/FV.dir/faceveri.cpp.o: /home/yufei/caffe/include/caffe/util/upgrade_p
 CMakeFiles/FV.dir/filesystem.cpp.o: ../filesystem.cpp
 CMakeFiles/FV.dir/filesystem.cpp.o: ../filesystem.h
 
-CMakeFiles/FV.dir/template.cpp.o: ../template.cpp
-CMakeFiles/FV.dir/template.cpp.o: ../template.h
-
 CMakeFiles/FV.dir/utils.cpp.o: ../ARECOG.h
 CMakeFiles/FV.dir/utils.cpp.o: ../MRECOG.h
 CMakeFiles/FV.dir/utils.cpp.o: ../caffeFaceVal.h
 CMakeFiles/FV.dir/utils.cpp.o: ../faceAlign.h
 CMakeFiles/FV.dir/utils.cpp.o: ../featureExByCaffe.h
-CMakeFiles/FV.dir/utils.cpp.o: ../filesystem.h
 CMakeFiles/FV.dir/utils.cpp.o: ../utils.cpp
 CMakeFiles/FV.dir/utils.cpp.o: ../utils.h
 CMakeFiles/FV.dir/utils.cpp.o: /home/yufei/caffe/include/caffe/blob.hpp
