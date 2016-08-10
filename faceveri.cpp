@@ -20,6 +20,10 @@ int main()
 	string m = "../Models";
 	r->A_Init(m.c_str());
 	
+
+	//r->getnormface("D:/work/LCNN_TRAIN/tools/code_point/image");
+	r->getnormface("C:\\Users\\yufei.zf\\Desktop");
+
 	string Apicpath = "../imgs/ym1.jpg";
 	string Bpicpath = "../imgs/ym2.jpg";
 
@@ -53,7 +57,7 @@ int main()
 	//showface (Bpic,frlB[0].rect);
 	//showface (Cpic,frlC[0].rect);
 	//showface (Dpic,frlD[0].rect);
-	cout<<"facenums1,2,3,4 is "<<listsizeA<<" "<<listsizeB<<" "<<listsizeC<<" "<<listsizeD<<endl;
+	//cout<<"facenums1,2,3,4 is "<<listsizeA<<" "<<listsizeB<<" "<<listsizeC<<" "<<listsizeD<<endl;
 
 	ARect Aefr, Befr, Cefr, Defr;
 	AFeature Af,Bf,Cf,Df;
@@ -72,6 +76,8 @@ int main()
 	//cout << "ave extract cost "<<extractf_cost/1000.0 << endl;
 
 	r->AFaceProcess_GetFaceFeature(Apic, frlA[0], Af);
+
+	cout << Af.feature;
 
 	r->AFaceProcess_GetFaceFeature(Bpic, frlB[0], Bf);
 	double simAB = 0.0;

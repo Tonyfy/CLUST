@@ -13,4 +13,5 @@ void ExpandRect(const cv::Mat& src, cv::Mat& dst, cv::Rect& rect, cv::Rect& real
 int cosSimilarity(const cv::Mat& q, const cv::Mat& r, double& similarity);
 int ouSimilarity(const cv::Mat& q, const cv::Mat& r, double& similarity);
 
+
 #endif //UTILS_H__

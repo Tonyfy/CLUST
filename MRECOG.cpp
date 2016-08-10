@@ -51,6 +51,47 @@ int MRECOG::A_UnInit()
 	return 0;
 }
 
+void MRECOG::getnormface(const std::string& path)
+{
+	vector<string> imgs;
+	FileSystem::readDir(path, "jpg", imgs);
+	string outpath = "../normtrainset";
+	FileSystem::makeDir(outpath.c_str());
+
+	for (int i = 0; i < imgs.size(); i++)
+	{
+		Mat srcgray;
+		AFaceProcess_ReadImage(path+"/"+imgs[i], srcgray);
+		string imgname = FileSystem::getFileName(imgs[i]);
+
+		ARect ar;
+		ar.rect = Rect(65, 178, 78, 191);
+
+		vector<Point2f> landmarks;
+		BBox bbox_ = BBox(ar.rect).subBBox(0.1, 0.9, 0.2, 1);
+		landmarks = lder.DetectLandmark(srcgray, bbox_);
+
+		ar.ld.push_back(Point((int)landmarks[0].x, (int)landmarks[0].y));
+		ar.ld.push_back(Point((int)landmarks[1].x, (int)landmarks[1].y));
+		ar.ld.push_back(Point((int)landmarks[2].x, (int)landmarks[2].y));
+		ar.ld.push_back(Point((int)landmarks[3].x, (int)landmarks[3].y));
+		ar.ld.push_back(Point((int)landmarks[4].x, (int)landmarks[4].y));
+		int cm_x = (ar.ld[3].x + ar.ld[4].x) / 2;
+		int cm_y = (ar.ld[3].y + ar.ld[4].y) / 2;
+		ar.ld.push_back(Point(cm_x, cm_y));
+
+		Mat face;
+		AFaceProcess_Getface(srcgray, ar, face);
+
+		resize(face,face,cvSize(144,144));
+
+		string savepath = outpath + "/" + imgname + ".jpg";
+		imwrite(savepath,face);
+
+
+	}
+}
+
 int MRECOG::AFaceProcess_ReadImage(const std::string &imgpath, Mat& img)
 {
 	img = imread(imgpath, 0);
@@ -239,14 +280,14 @@ int MRECOG::AFaceProcess_GetfaceFeature(cv::Mat& face, AFeature &feature)
 	resize(face, face, cvSize(128, 128));
 	face.convertTo(face, CV_32FC1, 1.0 / 255.0);
 
-	double start = cv::getTickCount();
-	for (int i = 0; i < 1000;)
-	{
-		i++;
-		fe->extractfeature(face, feature.feature);
-	}
-	double extractf_cost = (cv::getTickCount() - start) / cv::getTickFrequency();
-	cout << "ave extract cost " << extractf_cost / 1000.0 << endl;
+	//double start = cv::getTickCount();
+	//for (int i = 0; i < 1000;)
+	//{
+	//	i++;
+	//	fe->extractfeature(face, feature.feature);
+	//}
+	//double extractf_cost = (cv::getTickCount() - start) / cv::getTickFrequency();
+	//cout << "ave extract cost " << extractf_cost / 1000.0 << endl;
 
 	fe->extractfeature(face, feature.feature);
 
@@ -528,4 +569,43 @@ void MRECOG::getNormfaceInbigface(Mat& bigface, ARect &efr, Rect &r)
 	r.height = newWH;
 	r.y = efr.ld[0].y - ec_mc_y * 40 / 48.0;
 	r.x = (bigface.cols - r.width) / 2;
+}
+
+int MRECOG::AFaceProcess_regImage(const std::string &imgpath, const std::string &id)
+{
+	int val = 0;
+	Mat srcimg;
+	AFaceProcess_ReadImage(imgpath,srcimg);
+	int list_size = 0;
+	vector<ARect> Arectlist;
+	int fdectnum = AFaceProcess_Facedetect(srcimg, list_size, Arectlist, 0);
+
+	AFeature feature;
+	if (fdectnum == 1)
+	{
+		//1个人脸，是否太小呢？
+		if (Arectlist[0].rect.width <= 80)
+		{
+			val = REG_SMALL_SIZE;  //
+		}
+		else
+		{
+			//大小合适，提取特征.观察是否有重名，是否注册成功。
+			int getfeatureval = AFaceProcess_GetFaceFeature(srcimg, Arectlist[0], feature);
+			val = getfeatureval;
+
+			//注册进入数据库
+			//todo
+		}
+	}
+	else if (fdectnum == 0)
+	{
+		val = REG_NOFACE;
+	}
+	else 
+	{
+		val = REG_MANYFACE;
+	}
+
+	return val;
 }

@@ -21,6 +21,13 @@ typedef struct AlphaRect
 	float face_score;
 }ARect;
 
+#define REG_SUCCESS                        0
+#define REG_DOUBLENAME_OTHERPERSON         1
+#define REG_SMALL_SIZE                     2
+#define REG_NOFACE                         3
+#define REG_MANYFACE                       4
+#define REG_ERROR_SQL                      5
+
 class ARECOG
 {
 public:
@@ -28,6 +35,8 @@ public:
 	~ARECOG()=default;
 	virtual int A_Init(const char *modelpath)=0;
 	virtual int A_UnInit() = 0;
+	virtual void getnormface(const std::string& path)=0;
+
 	virtual int AFaceProcess_ReadImage(const std::string &imgpath, cv::Mat& img) = 0;
 	virtual int AFaceProcess_SaveImage(const cv::Mat& eimg, std::string& savepath) = 0;
 	virtual int AFaceProcess_Facedetect(const cv::Mat& image, int& list_size,std::vector<ARect> &face_rect_list, int method = 0) = 0;
@@ -38,6 +47,7 @@ public:
 	virtual int AFaceProcess_FeatureCompare(const AFeature& query_feature,const AFeature& ref_feature, double& similarity) = 0;
 	virtual int compareFace(cv::Mat& queryface, cv::Mat& refface, double& similarity)=0;
 
+	virtual int AFaceProcess_regImage(const std::string &imgpath, const std::string &id) = 0;
 public:
 
 };
