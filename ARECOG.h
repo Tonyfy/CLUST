@@ -7,6 +7,11 @@
 #include <opencv2/imgproc/imgproc.hpp>
 //#include "mysqlCPP.h"
 
+struct datapoint
+{
+	int label;
+	bool clustcenter;
+};
 
 typedef struct AlphaFeature
 {
@@ -20,6 +25,17 @@ typedef struct AlphaRect
 	std::vector<cv::Point> ld;  //le,re,nose,lm,rm,cm;
 	float face_score;
 }ARect;
+
+struct CFace
+{
+	std::string srcpath;
+	ARect facerect;
+	AFeature facefeature;
+	int facelabel;
+	bool isclustCenter;
+	double x_width;
+	double y_height;
+};
 
 #define REG_SUCCESS                        0
 #define REG_DOUBLENAME_OTHERPERSON         1
@@ -46,6 +62,11 @@ public:
 	virtual int AFaceProcess_GetFaceFeature(cv::Mat& image, ARect& facerect,AFeature& feature) = 0;
 	virtual int AFaceProcess_FeatureCompare(const AFeature& query_feature,const AFeature& ref_feature, double& similarity) = 0;
 	virtual int compareFace(cv::Mat& queryface, cv::Mat& refface, double& similarity)=0;
+	
+	virtual int AFaceProcess_GetDist(const std::vector<CFace>& cfaces, cv::Mat &dist) = 0;
+
+	virtual int AFaceProcess_Clust(const std::vector<CFace> &cfaces, std::vector<datapoint> &result) = 0;
+
 
 	virtual int AFaceProcess_regImage(const std::string &imgpath, const std::string &id) = 0;
 public:

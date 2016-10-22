@@ -1,6 +1,6 @@
 #include "MRECOG.h"
 #include "utils.h"
-
+#include "fastCluster.h"
 #include "filesystem.h"
 
 
@@ -608,4 +608,29 @@ int MRECOG::AFaceProcess_regImage(const std::string &imgpath, const std::string 
 	}
 
 	return val;
+}
+
+int MRECOG::AFaceProcess_GetDist(const vector<CFace>& cfaces, Mat &dist)
+{
+	int Numface = cfaces.size();
+	dist = Mat::zeros(Numface, Numface, CV_64FC1);
+	for (int i = 0; i < Numface - 1; i++)
+	{
+		for (int j = i + 1; j < Numface; j++)
+		{
+			double simij;
+			AFaceProcess_FeatureCompare(cfaces[i].facefeature, cfaces[j].facefeature, simij);
+			dist.at<double>(i, j) = 1 - simij;
+			dist.at<double>(j, i) = 1 - simij;  //相似度越高，距离越小
+		}
+	}
+	return 0;
+}
+
+int MRECOG::AFaceProcess_Clust(const std::vector<CFace> &cfaces, std::vector<datapoint> &result)
+{
+	Mat dist;
+	AFaceProcess_GetDist(cfaces, dist);
+	fastClust(dist, result);
+	return 0;
 }

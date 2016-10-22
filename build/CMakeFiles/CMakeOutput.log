@@ -1,4 +1,4 @@
-The system is: Windows - 6.1.7601 - AMD64
+The system is: Windows - 6.2 - AMD64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler:  
 Build flags: 
@@ -6,44 +6,44 @@ Id flags:
 
 The output was:
 0
-Microsoft(R) 生成引擎版本 12.0.31101.0
+Microsoft(R) 生成引擎版本 12.0.30723.0
 [Microsoft .NET Framework 版本 4.0.30319.42000]
 版权所有 (C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2016/8/7 11:50:29。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\3.5.2\CompilerIdC\CompilerIdC.vcxproj”(默认目标)。
+生成启动时间为 2016/10/22 17:19:21。
+节点 1 上的项目“F:\fandy\hack\Clust\build\CMakeFiles\3.1.0-rc2\CompilerIdC\CompilerIdC.vcxproj”(默认目标)。
 PrepareForBuild:
   正在创建目录“Debug\”。
   正在创建目录“Debug\CompilerIdC.tlog\”。
 InitializeBuildStatus:
   正在创建“Debug\CompilerIdC.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue CMakeCCompilerId.c
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue CMakeCCompilerId.c
   CMakeCCompilerId.c
 Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
-  CompilerIdC.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\3.5.2\CompilerIdC\.\CompilerIdC.exe
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdC.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCCompilerId.obj
+  CompilerIdC.vcxproj -> F:\fandy\hack\Clust\build\CMakeFiles\3.1.0-rc2\CompilerIdC\.\CompilerIdC.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
   :VCEnd
-  CMAKE_C_COMPILER=D:\Program Files (x86)\VS2013\VC\bin\cl.exe
+  CMAKE_C_COMPILER=D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\cl.exe
 FinalizeBuildStatus:
   正在删除文件“Debug\CompilerIdC.tlog\unsuccessfulbuild”。
   正在对“Debug\CompilerIdC.tlog\CompilerIdC.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\3.5.2\CompilerIdC\CompilerIdC.vcxproj”(默认目标)的操作。
+已完成生成项目“F:\fandy\hack\Clust\build\CMakeFiles\3.1.0-rc2\CompilerIdC\CompilerIdC.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:02.40
+已用时间 00:00:02.00
 
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
 
-The C compiler identification is MSVC, found in "D:/SEAL/AlphaRecogAPI/build/CMakeFiles/3.5.2/CompilerIdC/CompilerIdC.exe"
+The C compiler identification is MSVC, found in "F:/fandy/hack/Clust/build/CMakeFiles/3.1.0-rc2/CompilerIdC/CompilerIdC.exe"
 
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler:  
@@ -52,287 +52,194 @@ Id flags:
 
 The output was:
 0
-Microsoft(R) 生成引擎版本 12.0.31101.0
+Microsoft(R) 生成引擎版本 12.0.30723.0
 [Microsoft .NET Framework 版本 4.0.30319.42000]
 版权所有 (C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2016/8/7 11:50:32。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\3.5.2\CompilerIdCXX\CompilerIdCXX.vcxproj”(默认目标)。
+生成启动时间为 2016/10/22 17:19:23。
+节点 1 上的项目“F:\fandy\hack\Clust\build\CMakeFiles\3.1.0-rc2\CompilerIdCXX\CompilerIdCXX.vcxproj”(默认目标)。
 PrepareForBuild:
   正在创建目录“Debug\”。
   正在创建目录“Debug\CompilerIdCXX.tlog\”。
 InitializeBuildStatus:
   正在创建“Debug\CompilerIdCXX.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue CMakeCXXCompilerId.cpp
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /nologo /W0 /WX- /Od /Oy- /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue CMakeCXXCompilerId.cpp
   CMakeCXXCompilerId.cpp
 Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
-  CompilerIdCXX.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\3.5.2\CompilerIdCXX\.\CompilerIdCXX.exe
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:".\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\CompilerIdCXX.lib" /MACHINE:X86 /SAFESEH Debug\CMakeCXXCompilerId.obj
+  CompilerIdCXX.vcxproj -> F:\fandy\hack\Clust\build\CMakeFiles\3.1.0-rc2\CompilerIdCXX\.\CompilerIdCXX.exe
 PostBuildEvent:
   for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
   :VCEnd
-  CMAKE_CXX_COMPILER=D:\Program Files (x86)\VS2013\VC\bin\cl.exe
+  CMAKE_CXX_COMPILER=D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\cl.exe
 FinalizeBuildStatus:
   正在删除文件“Debug\CompilerIdCXX.tlog\unsuccessfulbuild”。
   正在对“Debug\CompilerIdCXX.tlog\CompilerIdCXX.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\3.5.2\CompilerIdCXX\CompilerIdCXX.vcxproj”(默认目标)的操作。
+已完成生成项目“F:\fandy\hack\Clust\build\CMakeFiles\3.1.0-rc2\CompilerIdCXX\CompilerIdCXX.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.93
+已用时间 00:00:00.75
 
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
 
-The CXX compiler identification is MSVC, found in "D:/SEAL/AlphaRecogAPI/build/CMakeFiles/3.5.2/CompilerIdCXX/CompilerIdCXX.exe"
+The CXX compiler identification is MSVC, found in "F:/fandy/hack/Clust/build/CMakeFiles/3.1.0-rc2/CompilerIdCXX/CompilerIdCXX.exe"
 
 Determining if the C compiler works passed with the following output:
-Change Dir: D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp
+Change Dir: F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_35635.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
-Microsoft(R) 生成引擎版本 12.0.31101.0
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTryCompileExec1663726150.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft(R) 生成引擎版本 12.0.30723.0
 [Microsoft .NET Framework 版本 4.0.30319.42000]
 版权所有 (C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2016/8/7 11:50:34。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_35635.vcxproj”(默认目标)。
+生成启动时间为 2016/10/22 17:19:24。
+节点 1 上的项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec1663726150.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_35635.dir\Debug\”。
-  正在创建目录“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_35635.dir\Debug\cmTC_35635.tlog\”。
+  正在创建目录“cmTryCompileExec1663726150.dir\Debug\”。
+  正在创建目录“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTryCompileExec1663726150.dir\Debug\cmTryCom.B3F3D089.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_35635.dir\Debug\cmTC_35635.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTryCompileExec1663726150.dir\Debug\cmTryCom.B3F3D089.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_35635.dir\Debug\\" /Fd"cmTC_35635.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\testCCompiler.c
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.31101 版版权所有(C) Microsoft Corporation。  保留所有权利。
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec1663726150.dir\Debug\\" /Fd"cmTryCompileExec1663726150.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\testCCompiler.c
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.30723 版版权所有(C) Microsoft Corporation。  保留所有权利。
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_35635.dir\Debug\\" /Fd"cmTC_35635.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\testCCompiler.c
+  cl /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec1663726150.dir\Debug\\" /Fd"cmTryCompileExec1663726150.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\testCCompiler.c
   
   testCCompiler.c
 Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_35635.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_35635.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_35635.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_35635.dir\Debug\testCCompiler.obj
-  cmTC_35635.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_35635.exe
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1663726150.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1663726150.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1663726150.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug cmTryCompileExec1663726150.dir\Debug\testCCompiler.obj
+  cmTryCompileExec1663726150.vcxproj -> F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1663726150.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_35635.dir\Debug\cmTC_35635.tlog\unsuccessfulbuild”。
-  正在对“cmTC_35635.dir\Debug\cmTC_35635.tlog\cmTC_35635.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_35635.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTryCompileExec1663726150.dir\Debug\cmTryCom.B3F3D089.tlog\unsuccessfulbuild”。
+  正在对“cmTryCompileExec1663726150.dir\Debug\cmTryCom.B3F3D089.tlog\cmTryCompileExec1663726150.lastbuildstate”执行 Touch 任务。
+已完成生成项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec1663726150.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:02.22
+已用时间 00:00:01.00
 
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp
+Change Dir: F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_b20c0.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
-Microsoft(R) 生成引擎版本 12.0.31101.0
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTryCompileExec2869536663.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft(R) 生成引擎版本 12.0.30723.0
 [Microsoft .NET Framework 版本 4.0.30319.42000]
 版权所有 (C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2016/8/7 11:50:37。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_b20c0.vcxproj”(默认目标)。
+生成启动时间为 2016/10/22 17:19:25。
+节点 1 上的项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec2869536663.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_b20c0.dir\Debug\”。
-  正在创建目录“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_b20c0.dir\Debug\cmTC_b20c0.tlog\”。
+  正在创建目录“cmTryCompileExec2869536663.dir\Debug\”。
+  正在创建目录“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTryCompileExec2869536663.dir\Debug\cmTryCom.960833F0.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_b20c0.dir\Debug\cmTC_b20c0.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTryCompileExec2869536663.dir\Debug\cmTryCom.960833F0.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_b20c0.dir\Debug\\" /Fd"cmTC_b20c0.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCCompilerABI.c"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.31101 版版权所有(C) Microsoft Corporation。  保留所有权利。
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec2869536663.dir\Debug\\" /Fd"cmTryCompileExec2869536663.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCCompilerABI.c"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.30723 版版权所有(C) Microsoft Corporation。  保留所有权利。
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTC_b20c0.dir\Debug\\" /Fd"cmTC_b20c0.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCCompilerABI.c"
+  cl /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"cmTryCompileExec2869536663.dir\Debug\\" /Fd"cmTryCompileExec2869536663.dir\Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCCompilerABI.c"
   
   CMakeCCompilerABI.c
 Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_b20c0.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_b20c0.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_b20c0.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_b20c0.dir\Debug\CMakeCCompilerABI.obj
-  cmTC_b20c0.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_b20c0.exe
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec2869536663.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2869536663.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2869536663.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug cmTryCompileExec2869536663.dir\Debug\CMakeCCompilerABI.obj
+  cmTryCompileExec2869536663.vcxproj -> F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec2869536663.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_b20c0.dir\Debug\cmTC_b20c0.tlog\unsuccessfulbuild”。
-  正在对“cmTC_b20c0.dir\Debug\cmTC_b20c0.tlog\cmTC_b20c0.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_b20c0.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTryCompileExec2869536663.dir\Debug\cmTryCom.960833F0.tlog\unsuccessfulbuild”。
+  正在对“cmTryCompileExec2869536663.dir\Debug\cmTryCom.960833F0.tlog\cmTryCompileExec2869536663.lastbuildstate”执行 Touch 任务。
+已完成生成项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec2869536663.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:02.10
+已用时间 00:00:00.57
 
 
 Determining if the CXX compiler works passed with the following output:
-Change Dir: D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp
+Change Dir: F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_480fe.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
-Microsoft(R) 生成引擎版本 12.0.31101.0
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTryCompileExec1256368624.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft(R) 生成引擎版本 12.0.30723.0
 [Microsoft .NET Framework 版本 4.0.30319.42000]
 版权所有 (C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2016/8/7 11:50:40。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_480fe.vcxproj”(默认目标)。
+生成启动时间为 2016/10/22 17:19:26。
+节点 1 上的项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec1256368624.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_480fe.dir\Debug\”。
-  正在创建目录“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_480fe.dir\Debug\cmTC_480fe.tlog\”。
+  正在创建目录“cmTryCompileExec1256368624.dir\Debug\”。
+  正在创建目录“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTryCompileExec1256368624.dir\Debug\cmTryCom.A50979C8.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_480fe.dir\Debug\cmTC_480fe.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTryCompileExec1256368624.dir\Debug\cmTryCom.A50979C8.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTC_480fe.dir\Debug\\" /Fd"cmTC_480fe.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.31101 版版权所有(C) Microsoft Corporation。  保留所有权利。
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec1256368624.dir\Debug\\" /Fd"cmTryCompileExec1256368624.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.30723 版版权所有(C) Microsoft Corporation。  保留所有权利。
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTC_480fe.dir\Debug\\" /Fd"cmTC_480fe.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
+  cl /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec1256368624.dir\Debug\\" /Fd"cmTryCompileExec1256368624.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\testCXXCompiler.cxx
   
   testCXXCompiler.cxx
 Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_480fe.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_480fe.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_480fe.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_480fe.dir\Debug\testCXXCompiler.obj
-  cmTC_480fe.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_480fe.exe
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1256368624.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1256368624.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec1256368624.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug cmTryCompileExec1256368624.dir\Debug\testCXXCompiler.obj
+  cmTryCompileExec1256368624.vcxproj -> F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec1256368624.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_480fe.dir\Debug\cmTC_480fe.tlog\unsuccessfulbuild”。
-  正在对“cmTC_480fe.dir\Debug\cmTC_480fe.tlog\cmTC_480fe.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_480fe.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTryCompileExec1256368624.dir\Debug\cmTryCom.A50979C8.tlog\unsuccessfulbuild”。
+  正在对“cmTryCompileExec1256368624.dir\Debug\cmTryCom.A50979C8.tlog\cmTryCompileExec1256368624.lastbuildstate”执行 Touch 任务。
+已完成生成项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec1256368624.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.85
+已用时间 00:00:00.60
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp
+Change Dir: F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_a66e6.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
-Microsoft(R) 生成引擎版本 12.0.31101.0
+Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTryCompileExec2252357725.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
+Microsoft(R) 生成引擎版本 12.0.30723.0
 [Microsoft .NET Framework 版本 4.0.30319.42000]
 版权所有 (C) Microsoft Corporation。保留所有权利。
 
-生成启动时间为 2016/8/7 11:50:42。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_a66e6.vcxproj”(默认目标)。
+生成启动时间为 2016/10/22 17:19:27。
+节点 1 上的项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec2252357725.vcxproj”(默认目标)。
 PrepareForBuild:
-  正在创建目录“cmTC_a66e6.dir\Debug\”。
-  正在创建目录“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_a66e6.dir\Debug\cmTC_a66e6.tlog\”。
+  正在创建目录“cmTryCompileExec2252357725.dir\Debug\”。
+  正在创建目录“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\”。
+  正在创建目录“cmTryCompileExec2252357725.dir\Debug\cmTryCom.6B754192.tlog\”。
 InitializeBuildStatus:
-  正在创建“cmTC_a66e6.dir\Debug\cmTC_a66e6.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+  正在创建“cmTryCompileExec2252357725.dir\Debug\cmTryCom.6B754192.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
 ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTC_a66e6.dir\Debug\\" /Fd"cmTC_a66e6.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCXXCompilerABI.cpp"
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.31101 版版权所有(C) Microsoft Corporation。  保留所有权利。
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec2252357725.dir\Debug\\" /Fd"cmTryCompileExec2252357725.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXCompilerABI.cpp"
+  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.30723 版版权所有(C) Microsoft Corporation。  保留所有权利。
   
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTC_a66e6.dir\Debug\\" /Fd"cmTC_a66e6.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.5\Modules\CMakeCXXCompilerABI.cpp"
+  cl /c /I"D:\Program Files (x86)\Visual Leak Detector\include" /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTryCompileExec2252357725.dir\Debug\\" /Fd"cmTryCompileExec2252357725.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue "D:\Program Files (x86)\CMake\share\cmake-3.1\Modules\CMakeCXXCompilerABI.cpp"
   
   CMakeCXXCompilerABI.cpp
 Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_a66e6.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_a66e6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_a66e6.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_a66e6.dir\Debug\CMakeCXXCompilerABI.obj
-  cmTC_a66e6.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_a66e6.exe
+  D:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec2252357725.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files (x86)\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2252357725.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"F:/fandy/hack/Clust/build/CMakeFiles/CMakeTmp/Debug/cmTryCompileExec2252357725.lib" /MACHINE:X86 /SAFESEH  /machine:X86 /debug cmTryCompileExec2252357725.dir\Debug\CMakeCXXCompilerABI.obj
+  cmTryCompileExec2252357725.vcxproj -> F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\Debug\cmTryCompileExec2252357725.exe
 FinalizeBuildStatus:
-  正在删除文件“cmTC_a66e6.dir\Debug\cmTC_a66e6.tlog\unsuccessfulbuild”。
-  正在对“cmTC_a66e6.dir\Debug\cmTC_a66e6.tlog\cmTC_a66e6.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_a66e6.vcxproj”(默认目标)的操作。
+  正在删除文件“cmTryCompileExec2252357725.dir\Debug\cmTryCom.6B754192.tlog\unsuccessfulbuild”。
+  正在对“cmTryCompileExec2252357725.dir\Debug\cmTryCom.6B754192.tlog\cmTryCompileExec2252357725.lastbuildstate”执行 Touch 任务。
+已完成生成项目“F:\fandy\hack\Clust\build\CMakeFiles\CMakeTmp\cmTryCompileExec2252357725.vcxproj”(默认目标)的操作。
 
 已成功生成。
     0 个警告
     0 个错误
 
-已用时间 00:00:01.99
+已用时间 00:00:00.63
 
 
-
-
-Detecting CXX [] compiler features compiled with the following output:
-Change Dir: D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"C:/Program Files (x86)/MSBuild/12.0/bin/MSBuild.exe" "cmTC_f9235.vcxproj" "/p:Configuration=Debug" "/p:VisualStudioVersion=12.0"
-Microsoft(R) 生成引擎版本 12.0.31101.0
-[Microsoft .NET Framework 版本 4.0.30319.42000]
-版权所有 (C) Microsoft Corporation。保留所有权利。
-
-生成启动时间为 2016/8/7 11:50:45。
-节点 1 上的项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_f9235.vcxproj”(默认目标)。
-PrepareForBuild:
-  正在创建目录“cmTC_f9235.dir\Debug\”。
-  正在创建目录“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\”。
-  正在创建目录“cmTC_f9235.dir\Debug\cmTC_f9235.tlog\”。
-InitializeBuildStatus:
-  正在创建“cmTC_f9235.dir\Debug\cmTC_f9235.tlog\unsuccessfulbuild”，因为已指定“AlwaysCreate”。
-ClCompile:
-  D:\Program Files (x86)\VS2013\VC\bin\CL.exe /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTC_f9235.dir\Debug\\" /Fd"cmTC_f9235.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue D:\SEAL\AlphaRecogAPI\build\CMakeFiles\feature_tests.cxx
-  用于 x86 的 Microsoft (R) C/C++ 优化编译器 18.00.31101 版版权所有(C) Microsoft Corporation。  保留所有权利。
-  
-  cl /c /Zi /W3 /WX- /Od /Ob0 /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D "CMAKE_INTDIR=\"Debug\"" /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /GR /Fo"cmTC_f9235.dir\Debug\\" /Fd"cmTC_f9235.dir\Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:queue D:\SEAL\AlphaRecogAPI\build\CMakeFiles\feature_tests.cxx
-  
-  feature_tests.cxx
-Link:
-  D:\Program Files (x86)\VS2013\VC\bin\link.exe /ERRORREPORT:QUEUE /OUT:"D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_f9235.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_f9235.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/SEAL/AlphaRecogAPI/build/CMakeFiles/CMakeTmp/Debug/cmTC_f9235.lib" /MACHINE:X86 /SAFESEH  /machine:X86 cmTC_f9235.dir\Debug\feature_tests.obj
-  cmTC_f9235.vcxproj -> D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\Debug\cmTC_f9235.exe
-FinalizeBuildStatus:
-  正在删除文件“cmTC_f9235.dir\Debug\cmTC_f9235.tlog\unsuccessfulbuild”。
-  正在对“cmTC_f9235.dir\Debug\cmTC_f9235.tlog\cmTC_f9235.lastbuildstate”执行 Touch 任务。
-已完成生成项目“D:\SEAL\AlphaRecogAPI\build\CMakeFiles\CMakeTmp\cmTC_f9235.vcxproj”(默认目标)的操作。
-
-已成功生成。
-    0 个警告
-    0 个错误
-
-已用时间 00:00:01.87
-
-
-    Feature record: CXX_FEATURE:1cxx_alias_templates
-    Feature record: CXX_FEATURE:0cxx_alignas
-    Feature record: CXX_FEATURE:0cxx_alignof
-    Feature record: CXX_FEATURE:0cxx_attributes
-    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
-    Feature record: CXX_FEATURE:1cxx_auto_type
-    Feature record: CXX_FEATURE:0cxx_binary_literals
-    Feature record: CXX_FEATURE:0cxx_constexpr
-    Feature record: CXX_FEATURE:1cxx_contextual_conversions
-    Feature record: CXX_FEATURE:1cxx_decltype
-    Feature record: CXX_FEATURE:0cxx_decltype_auto
-    Feature record: CXX_FEATURE:1cxx_default_function_template_args
-    Feature record: CXX_FEATURE:1cxx_defaulted_functions
-    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
-    Feature record: CXX_FEATURE:1cxx_delegating_constructors
-    Feature record: CXX_FEATURE:0cxx_deleted_functions
-    Feature record: CXX_FEATURE:0cxx_digit_separators
-    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
-    Feature record: CXX_FEATURE:1cxx_explicit_conversions
-    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
-    Feature record: CXX_FEATURE:1cxx_extern_templates
-    Feature record: CXX_FEATURE:1cxx_final
-    Feature record: CXX_FEATURE:0cxx_func_identifier
-    Feature record: CXX_FEATURE:1cxx_generalized_initializers
-    Feature record: CXX_FEATURE:0cxx_generic_lambdas
-    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
-    Feature record: CXX_FEATURE:0cxx_inline_namespaces
-    Feature record: CXX_FEATURE:1cxx_lambdas
-    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
-    Feature record: CXX_FEATURE:1cxx_local_type_template_args
-    Feature record: CXX_FEATURE:1cxx_long_long_type
-    Feature record: CXX_FEATURE:0cxx_noexcept
-    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
-    Feature record: CXX_FEATURE:1cxx_nullptr
-    Feature record: CXX_FEATURE:1cxx_override
-    Feature record: CXX_FEATURE:1cxx_range_for
-    Feature record: CXX_FEATURE:1cxx_raw_string_literals
-    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
-    Feature record: CXX_FEATURE:0cxx_return_type_deduction
-    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
-    Feature record: CXX_FEATURE:1cxx_rvalue_references
-    Feature record: CXX_FEATURE:0cxx_sizeof_member
-    Feature record: CXX_FEATURE:1cxx_static_assert
-    Feature record: CXX_FEATURE:1cxx_strong_enums
-    Feature record: CXX_FEATURE:1cxx_template_template_parameters
-    Feature record: CXX_FEATURE:0cxx_thread_local
-    Feature record: CXX_FEATURE:1cxx_trailing_return_types
-    Feature record: CXX_FEATURE:0cxx_unicode_literals
-    Feature record: CXX_FEATURE:1cxx_uniform_initialization
-    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
-    Feature record: CXX_FEATURE:0cxx_user_literals
-    Feature record: CXX_FEATURE:1cxx_variadic_macros
-    Feature record: CXX_FEATURE:1cxx_variadic_templates

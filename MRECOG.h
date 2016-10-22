@@ -27,6 +27,10 @@ public:
 	int AFaceProcess_Getface(cv::Mat& image, ARect& facerect, cv::Mat& face)override;
 	int AFaceProcess_regImage(const std::string &imgpath, const std::string &id) override;
 
+	int AFaceProcess_GetDist(const vector<CFace>& cfaces, Mat &dist) override;
+
+	int AFaceProcess_Clust(const std::vector<CFace> &cfaces, std::vector<datapoint> &result) override;
+
 
 	void rotateFaceOrin(cv::Mat& srcimg, ARect& src_r, cv::Mat& dstimg, ARect& dst_r);
 	int AFaceProcess_RotateOneFace(cv::Mat& image, ARect &face_rect_list, cv::Mat& dstImage, ARect &dst_efr);
