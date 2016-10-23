@@ -1,6 +1,5 @@
 #include "MRECOG.h"
 #include "utils.h"
-#include "fastCluster.h"
 #include "filesystem.h"
 
 
@@ -47,7 +46,6 @@ int MRECOG::A_UnInit()
 {
 	delete cfv;
 	delete fe;
-
 	return 0;
 }
 
@@ -627,10 +625,10 @@ int MRECOG::AFaceProcess_GetDist(const vector<CFace>& cfaces, Mat &dist)
 	return 0;
 }
 
-int MRECOG::AFaceProcess_Clust(const std::vector<CFace> &cfaces, std::vector<datapoint> &result)
+int MRECOG::AFaceProcess_Clust(const std::vector<CFace> &cfaces, Cluster cltr,std::vector<datapoint> &result)
 {
 	Mat dist;
 	AFaceProcess_GetDist(cfaces, dist);
-	fastClust(dist, result);
+	cltr.fastClust(dist, result);
 	return 0;
 }

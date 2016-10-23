@@ -14,6 +14,7 @@
 using namespace std;
 using namespace cv;
 
+
 int main(int argc,char* argv[])
 {
 	google::InitGoogleLogging(" ");
@@ -26,6 +27,7 @@ int main(int argc,char* argv[])
 	loadConfig("../config.txt");
 	string model = Config["model"];
 	ARECOG *ar = new MRECOG();
+	Cluster cltr = Cluster("data.txt");
 	ar->A_Init(model.c_str());
 
 	sprintf(buff, "initialize ends");
@@ -62,7 +64,7 @@ int main(int argc,char* argv[])
 		AFeature facefeature;
 		logger("extracting face feature");
 		ar->AFaceProcess_GetFaceFeature(bigface, tar, facefeature);
-		logger("get feature successfully!");
+		//logger("get feature successfully!");
 
 		CFace tmpcface;
 		tmpcface.isclustCenter = false;
@@ -85,6 +87,7 @@ int main(int argc,char* argv[])
 
 	//4，调用fastCluster聚类算法进行聚类，输出每个feature所属的类别，即每张人脸的类别。
 	/*人脸聚类*/
+	//cltr.data_analyse << "参与聚类的样本数量 " << cfaces.size() << endl;
 	if (cfaces.size() == 0)
 	{
 		cerr << "no face " << endl;
@@ -106,7 +109,7 @@ int main(int argc,char* argv[])
 	{
 		//人脸多于1张，聚类。
 		vector<datapoint> result;
-		ar->AFaceProcess_Clust(cfaces, result);
+		ar->AFaceProcess_Clust(cfaces, cltr,result);
 
 		for (int i = 0; i < result.size(); i++)
 		{
@@ -130,5 +133,6 @@ int main(int argc,char* argv[])
 			imwrite(savepath, face);
 		}
 	}
+
 	return 0;
 }

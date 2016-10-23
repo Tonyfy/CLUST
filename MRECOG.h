@@ -10,6 +10,7 @@
 
 class MRECOG :public ARECOG
 {
+
 public:
 
 	int A_Init(const char *modulepath) override;
@@ -29,7 +30,7 @@ public:
 
 	int AFaceProcess_GetDist(const vector<CFace>& cfaces, Mat &dist) override;
 
-	int AFaceProcess_Clust(const std::vector<CFace> &cfaces, std::vector<datapoint> &result) override;
+	int AFaceProcess_Clust(const std::vector<CFace> &cfaces, Cluster cltr, std::vector<datapoint> &result) override;
 
 
 	void rotateFaceOrin(cv::Mat& srcimg, ARect& src_r, cv::Mat& dstimg, ARect& dst_r);
@@ -46,6 +47,7 @@ public:
 	string protonet;
 	string caffemodel;
 	featureExer *fe;
+
 
 };
 

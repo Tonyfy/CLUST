@@ -5,13 +5,8 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
+#include "fastCluster.h"
 //#include "mysqlCPP.h"
-
-struct datapoint
-{
-	int label;
-	bool clustcenter;
-};
 
 typedef struct AlphaFeature
 {
@@ -65,7 +60,7 @@ public:
 	
 	virtual int AFaceProcess_GetDist(const std::vector<CFace>& cfaces, cv::Mat &dist) = 0;
 
-	virtual int AFaceProcess_Clust(const std::vector<CFace> &cfaces, std::vector<datapoint> &result) = 0;
+	virtual int AFaceProcess_Clust(const std::vector<CFace> &cfaces, Cluster cltr, std::vector<datapoint> &result) = 0;
 
 
 	virtual int AFaceProcess_regImage(const std::string &imgpath, const std::string &id) = 0;

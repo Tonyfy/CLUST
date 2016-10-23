@@ -5,6 +5,7 @@
 using namespace std;
 using namespace cv;
 //using namespace arma;
+
 bool comp(node x, node y)
 {
 	return x.rho > y.rho;
@@ -29,8 +30,17 @@ bool comppics(picture x, picture y)
 	}
 	return false;
 }
+bool comprho(cluster x, cluster y)
+{
+	return x.centerrho > y.centerrho;
+}
 
-void regressionsplit(picture& pic1,picture& pic2, int& i,int s, 
+Cluster::Cluster(char *filename)
+{
+	//data_analyse = ofstream(filename);
+}
+
+void Cluster::regressionsplit(picture& pic1, picture& pic2, int& i, int s,
 	picsInoneTime& tmp, std::vector<picsInoneTime>& picsOT)
 {
 	while (i < s + 1)
@@ -56,7 +66,7 @@ void regressionsplit(picture& pic1,picture& pic2, int& i,int s,
 	}
 
 }
-void splitpicsOntime(std::vector<picture>& pics, int rule, 
+void Cluster::splitpicsOntime(std::vector<picture>& pics, int rule,
 	std::vector<picsInoneTime> & picsOT)
 {
 	assert((rule == 0) || (rule == 1) || (rule == 2) 
@@ -100,11 +110,8 @@ void splitpicsOntime(std::vector<picture>& pics, int rule,
 	//}
 
 }
-bool comprho(cluster x, cluster y)
-{
-	return x.centerrho > y.centerrho;
-}
-void fillval(vector<int> &a, int &val)
+
+void Cluster::fillval(vector<int> &a, int &val)
 {
 	for (int i = 0; i < a.size(); i++)
 	{
@@ -112,7 +119,7 @@ void fillval(vector<int> &a, int &val)
 	}
 }
 
-void fillval(vector<double> &a, double &val)
+void Cluster::fillval(vector<double> &a, double &val)
 {
 	for (int i = 0; i < a.size(); i++)
 	{
@@ -120,11 +127,10 @@ void fillval(vector<double> &a, double &val)
 	}
 }
 
-double getaverNeighrate(const Mat &dist)
+double Cluster::getaverNeighrate(const Mat &dist)
 {
 	int N = dist.rows;
 	int nneigh = 0;
-
 	double averdist = 0.0;
 	for (int i = 0; i < N - 1; i++)
 	{
@@ -133,22 +139,38 @@ double getaverNeighrate(const Mat &dist)
 			averdist += dist.at<double>(i, j);
 		}
 	}
-	double aver = 2 * averdist / (N*(N - 1));
+	double aver = 2 * averdist / (N*(N - 1));    //本样本中的平均距离
+
+	cout <<"样本间距离的均值 "<< aver << endl;
+	Mat mean, stddev;
+	meanStdDev(dist, mean, stddev);
+	cout << mean.at<double>(0, 0);
+	//data_analyse << "样本间距离的均值 ";
+	//data_analyse << mean.at<double>(0, 0);
+	//data_analyse << endl;
+	//data_analyse << "样本间距离的方差 " << stddev.at<double>(0, 0) << endl;
+	double dc = max(aver - 0.45, 0.1);
+	cout << "预估的距离dc为 ：" << dc << endl;
+	//data_analyse << "预估的距离dc " << dc << endl;
+
 	for (int i = 0; i < N - 1; i++)
 	{
 		for (int j = i + 1; j < N; j++)
 		{
-			if (dist.at<double>(i, j) < max(aver - 0.35, 0.1))
+			if (dist.at<double>(i, j) < dc)
 			{
 				nneigh++;
 			}
 		}
 	}
 	double percents = 100.0*nneigh / (double)(N*(N - 1) / 2);
+	cout << "邻居率为 " << percents << " %." << endl;
+	//data_analyse << "邻居率 " << percents << endl;
+
 	return percents;
 }
 
-double getDc(cv::Mat &dist, double& percent)
+double Cluster::getDc(cv::Mat &dist, double& percent)
 {
 	int Num = dist.rows;
 	int N = Num*(Num - 1) / 2;  //所有距离的总数
@@ -177,7 +199,7 @@ double getDc(cv::Mat &dist, double& percent)
 	return dc;
 }
 
-void calculateRho(cv::Mat &dist, double &dc, std::vector<double>& rho)
+void Cluster::calculateRho(cv::Mat &dist, double &dc, std::vector<double>& rho)
 {
 	int Num = dist.rows;
 	assert(rho.size() == Num);
@@ -195,7 +217,7 @@ void calculateRho(cv::Mat &dist, double &dc, std::vector<double>& rho)
 	}
 }
 
-void sortRho(vector<double>& rho, vector<double>& sorted_rho, vector<int>& ordrho)
+void Cluster::sortRho(vector<double>& rho, vector<double>& sorted_rho, vector<int>& ordrho)
 {
 	assert((sorted_rho.size() == rho.size()) && (ordrho.size() == rho.size()));
 	//将局部密度rho[Num] 按照降序排列，并保留下标号的次序。
@@ -213,7 +235,8 @@ void sortRho(vector<double>& rho, vector<double>& sorted_rho, vector<int>& ordrh
 		ordrho[i] = _rho[i].idx;
 	}
 }
-void sortgamma(vector<double>& gamma, vector<double>& sorted_gamma, vector<int>& ordgamma)
+void Cluster::sortgamma(vector<double>& gamma, vector<double>& sorted_gamma,
+	vector<int>& ordgamma)
 {
 	assert((sorted_gamma.size() == gamma.size()) && (ordgamma.size() == gamma.size()));
 	//将局部密度rho[Num] 按照降序排列，并保留下标号的次序。
@@ -232,7 +255,7 @@ void sortgamma(vector<double>& gamma, vector<double>& sorted_gamma, vector<int>&
 	}
 }
 
-void calculateDelta(cv::Mat& dist, vector<double>& rho, vector<double>& sorted_rho,
+void Cluster::calculateDelta(cv::Mat& dist, vector<double>& rho, vector<double>& sorted_rho,
 	vector<int>& ordrho, vector<double>& delta, vector<int>& nneigh, std::vector<double>& sorted_gamma, std::vector<int>& ordgamma)
 {
 	assert((delta.size() == rho.size()) && (nneigh.size() == rho.size())
@@ -277,14 +300,15 @@ void calculateDelta(cv::Mat& dist, vector<double>& rho, vector<double>& sorted_r
 
 }
 
-void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
+void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 {
 	assert(dist.rows == dist.cols);
 	int Num = dist.rows;
 	double percent = getaverNeighrate(dist); //指定平均邻居数的百分比
 	//percent = 5.0;
 	double dc = getDc(dist, percent);
-
+	cout << "根据邻居率计算的dc为：" << dc << endl;
+	//data_analyse << "根据邻居率计算的dc" << dc << endl;
 	vector<double> rho(Num);
 	calculateRho(dist, dc, rho);
 
@@ -312,29 +336,27 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 	loggammatxt.close();
 
 	//从sorted_gamma中得到断层位置，断层之前作为聚类中心。
-	double maxgammadif = 0;
-	int maxdifId = 0;
-	for (int i = 1; i < sorted_gamma.size(); i++)
-	{
-
-		double tmp = sorted_gamma[i - 1] - sorted_gamma[i];
-		if ((tmp > maxgammadif)&&(i>3))
-		{
-			maxgammadif = tmp;
-			maxdifId = i;
-		}
-		
-	}
+	//double maxgammadif = 0;
+	//int maxdifId = 0;
+	//for (int i = 1; i < sorted_gamma.size(); i++)
+	//{
+	//	double tmp = sorted_gamma[i - 1] - sorted_gamma[i];
+	//	if ((tmp > maxgammadif)&&(i>3))
+	//	{
+	//		maxgammadif = tmp;
+	//		maxdifId = i;
+	//	}	
+	//}
 
 	//从sorted_gamma的尾部，反向搜索，找到落差与maxgammadif相当，且Id比maxdifId大的。
-	for (int i = sorted_gamma.size() - 1; i > sorted_gamma.size() - maxdifId - 1; i--)
-	{
-		double tmp = sorted_gamma[i - 1] - sorted_gamma[i];
-		if (tmp > 0.5*maxgammadif)
-		{
-			maxdifId = i;
-		}
-	}
+	//for (int i = sorted_gamma.size() - 1; i > sorted_gamma.size() - maxdifId - 1; i--)
+	//{
+	//	double tmp = sorted_gamma[i - 1] - sorted_gamma[i];
+	//	if (tmp > 0.5*maxgammadif)
+	//	{
+	//		maxdifId = i;
+	//	}
+	//}
 
 	/*开始聚类*/
 	double maxdel = delta[ordrho[0]];
@@ -355,6 +377,10 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 	}
 	rhodelta << rhomin << " " << deltamin << endl;
 	rhodelta.close();
+
+	//data_analyse << "rhomin " << rhomin << endl;
+	//data_analyse << "deltamin " << deltamin << endl;
+
 	//for (int i = 0; i < maxdifId; i++)
 	//{
 	//	cl[ordgamma[i]] = NCLUST;
@@ -372,7 +398,7 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 	}
 	//已找出所有的聚类中心。
 	cout << "NUMBER OF CLUSTERS : " << NCLUST << endl;
-
+	//data_analyse << "聚类中心总数 " << NCLUST << endl;
 	/*开始进行所有样点的分配，归入所有的中心*/
 	cout << "Performing assignation" << endl;
 	for (int i = 0; i < Num; i++)
@@ -439,6 +465,7 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 		int ling = 0;
 		fillval(nc, ling);
 		fillval(nh, ling);
+		//data_analyse << "类簇大小 ";
 		for (int i = 0; i < NCLUST; i++)
 		{
 			int ncc = 0;
@@ -459,9 +486,9 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 			nh[i] = nhh;
 			cout << "CLUSTER : " << i << "  CENTER: " << icl[i] << " ELEMENT: " << nc[i]
 				<< "  CORE: " << nh[i] << "  HALO: " << nc[i] - nh[i] << endl;
-
+			//data_analyse << nc[i] << " ";
 		}
-
+		//data_analyse << endl;
 		for (int i = 0; i < NCLUST; i++)
 		{
 			allclust[i].classid = i;
@@ -483,37 +510,24 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 		//找出所有单张图片 类。M*N矩阵
 		ofstream MNsimi("MNsimi.txt");
 		vector<cluster> onepicclust;
+		int single_class_element_size = 3; //可由已聚出类簇的尺寸进行估量。
+		///data_analyse << "单类标准（小于等于） " << single_class_element_size << endl;
+
 		for (int i = 0; i < NCLUST; i++)
 		{
-			if (allclust[i].nelement <= 10)
+			if (allclust[i].nelement <= single_class_element_size)
 			{
 				onepicclust.push_back(allclust[i]);
 			}
 		}
 		int Monepiccluster = onepicclust.size();
 		cout << " 单类个数" << Monepiccluster << endl;
+		//data_analyse << "单类数量 " << Monepiccluster << endl;
 
-		//int NNN = allclust.size();
-		//for (int i = 0; i <allclust.size(); i++)
-		//{
-		//	cluster ci = allclust[i];
-		//	int j = i + 1;
-		//	while (j < NNN)
-		//	{
-		//		if (isSameOne(dist, ci, allclust[j]))
-		//		{
-		//			cluster tmp;
-		//			mergeCluster(ci,allclust[j],tmp); 
-		//			allclust.erase(allclust.begin() + j);
-		//			allclust.erase(allclust.begin() + i);
-		//			allclust.insert(allclust.begin() + i, tmp);
-		//			NNN--;
-		//		}
-		//		j++;
-		//	}
-		//}
+		double merge_th = 0.7;
+		//data_analyse << "单类合并标准 " << merge_th << endl;
 
-
+		int merge_time = 0;
 		for (int i = 0; i < Monepiccluster; i++)
 		{
 			int maxid = -1;
@@ -524,7 +538,7 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 			{
 				double dist_mn = 1 - dist.at<double>(allclust[index].centerid, allclust[j].centerid);
 				MNsimi << dist_mn << " ";
-
+				//计算该单类与哪一个单类的相似度最大（1-距离），得到最接近的一个类簇
 				if ((dist_mn > maxsimi) && (dist_mn<0.95))
 				{
 					maxsimi = dist_mn;
@@ -532,9 +546,10 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 				}
 			}
 
-			if (maxsimi > 0.6)
+			if (maxsimi > merge_th)
 			{
-				//maxsimi大于0.5，认为需要合并
+				merge_time++;
+				//最接近的程度超过merge_th，认为需要合并
 				for (int n = 0; n < allclust[index].elements.size(); n++)
 				{
 					allclust[maxid].nhalo += 1;
@@ -543,10 +558,10 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 				}
 				//allclust[maxid].nhalo += 1;
 				//cl[onepicclust[i].centerid] = cl[allclust[maxid].centerid];
-				cout << "聚类 " << allclust[index].classid << "的中心是 " << allclust[index].centerid
+				/*cout << "聚类 " << allclust[index].classid << "的中心是 " << allclust[index].centerid
 					<< "含有 " << allclust[index].elements.size() << " 个人脸"
 					<< "与类别 " << maxid << "(含有 " << allclust[index].elements.size() << "张人脸)"
-					<< "合并 ，该类中心是 " << allclust[maxid].centerid << endl;
+					<< "合并 ，该类中心是 " << allclust[maxid].centerid << endl;*/
 				icl[allclust[index].classid] = icl[allclust[maxid].classid];
 				allclust[index].centerid = allclust[maxid].centerid;  //改变这个单类的类中心id
 
@@ -554,6 +569,7 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 			MNsimi << "\n";
 		}
 		MNsimi.close();
+		//data_analyse << "单类合并次数 " << merge_time << endl;
 
 		ofstream dist_center_ij("dist_center_ij.txt");
 
@@ -600,11 +616,11 @@ void fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 
 }
 
-bool isSameOne(cv::Mat &dist, cluster& A, cluster& B)
+bool Cluster::isSameOne(cv::Mat &dist, cluster& A, cluster& B)
 {
 	int M = A.elements.size();
 	int N = B.elements.size();
-	double ABsim;
+	double ABsim=0;
 	for (int i = 0; i < M; i++)
 	{
 		for (int j = 0; j < N; j++)
@@ -623,7 +639,7 @@ bool isSameOne(cv::Mat &dist, cluster& A, cluster& B)
 
 }
 
-void mergeCluster(cluster& A, cluster& B, cluster& C)
+void Cluster::mergeCluster(cluster& A, cluster& B, cluster& C)
 {
 	assert((A.nelement>0) && (B.nelement > 0));
 	A.nelement > B.nelement
