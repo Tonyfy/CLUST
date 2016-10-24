@@ -1,6 +1,6 @@
-#include "MRECOG.h"
-#include "utils.h"
-#include "filesystem.h"
+#include "../ARecog/MRECOG.h"
+#include "../ARecog/utils.h"
+#include "../ARecog/filesystem.h"
 
 
 using namespace cv;

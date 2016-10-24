@@ -9,14 +9,14 @@
 //
 //#include <cassert>
 //#include <caffe/caffe.hpp>
-//#include "featureExByCaffe.h"
+//#include "ARecog/featureExByCaffe.h"
 //#include <iostream>
 //#include <opencv2/core/core.hpp>
 //#include <opencv2/highgui/highgui.hpp>
 //#include <opencv2/imgproc/imgproc.hpp>
-//#include "utils.h"
-//#include "MRECOG.h"
-//#include "filesystem.h"
+//#include "ARecog/utils.h"
+//#include "ARecog/MRECOG.h"
+//#include "ARecog/filesystem.h"
 //
 //using namespace cv;
 //using namespace std;

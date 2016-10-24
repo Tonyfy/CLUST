@@ -1,7 +1,7 @@
 #include <iostream>
-#include "utils.h"
-#include "MRECOG.h"
-#include "filesystem.h"
+#include "../ARecog/utils.h"
+#include "../ARecog/MRECOG.h"
+#include "../ARecog/filesystem.h"
 
 using namespace cv;
 using namespace std;

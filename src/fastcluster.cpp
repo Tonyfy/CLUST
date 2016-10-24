@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "fastCluster.h"
+#include "../ARecog/fastCluster.h"
 
 using namespace std;
 using namespace cv;
@@ -129,6 +129,7 @@ void Cluster::fillval(vector<double> &a, double &val)
 
 double Cluster::getaverNeighrate(const Mat &dist)
 {
+	ofstream dataana("data.txt", ios::app);
 	int N = dist.rows;
 	int nneigh = 0;
 	double averdist = 0.0;

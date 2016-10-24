@@ -1,15 +1,15 @@
 #include <cassert>
 #include <caffe/caffe.hpp>
-#include "featureExByCaffe.h"
+#include "ARecog/featureExByCaffe.h"
 #include <iostream>
 #include <opencv2/core/core.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-#include "utils.h"
-#include "MRECOG.h"
-#include "filesystem.h"
-#include "fastCluster.h"
-#include  "common.h"
+#include "ARecog/utils.h"
+#include "ARecog/MRECOG.h"
+#include "ARecog/filesystem.h"
+#include "ARecog/fastCluster.h"
+#include  "ARecog/common.h"
 #include <string>
 using namespace std;
 using namespace cv;
@@ -88,6 +88,9 @@ int main(int argc,char* argv[])
 	//4，调用fastCluster聚类算法进行聚类，输出每个feature所属的类别，即每张人脸的类别。
 	/*人脸聚类*/
 	//cltr.data_analyse << "参与聚类的样本数量 " << cfaces.size() << endl;
+	ofstream dataana("data.txt", ios::app);
+	dataana << "参与聚类的样本数量 " << cfaces.size() << endl;
+	dataana.close();
 	if (cfaces.size() == 0)
 	{
 		cerr << "no face " << endl;
@@ -103,7 +106,7 @@ int main(int argc,char* argv[])
 		}
 		string savepath;
 		savepath = dirinclass + "/" + cfaces[0].srcpath.substr(cfaces[0].srcpath.find_last_of("/") + 1);
-		imwrite(savepath, face);
+		cv::imwrite(savepath, face);
 	}
 	else
 	{
@@ -130,7 +133,7 @@ int main(int argc,char* argv[])
 				savepath = dirinclass + "/" +
 					cfaces[i].srcpath.substr(cfaces[i].srcpath.find_last_of("/") + 1);
 			}
-			imwrite(savepath, face);
+			cv::imwrite(savepath, face);
 		}
 	}
 
