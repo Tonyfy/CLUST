@@ -146,13 +146,13 @@ double Cluster::getaverNeighrate(const Mat &dist)
 	Mat mean, stddev;
 	meanStdDev(dist, mean, stddev);
 	cout << mean.at<double>(0, 0);
-	//data_analyse << "样本间距离的均值 ";
-	//data_analyse << mean.at<double>(0, 0);
-	//data_analyse << endl;
-	//data_analyse << "样本间距离的方差 " << stddev.at<double>(0, 0) << endl;
-	double dc = max(aver - 0.45, 0.1);
-	cout << "预估的距离dc为 ：" << dc << endl;
-	//data_analyse << "预估的距离dc " << dc << endl;
+	dataana << "样本间距离的均值 ";
+	dataana << mean.at<double>(0, 0);
+	dataana << endl;
+	dataana << "样本间距离的方差 " << stddev.at<double>(0, 0) << endl;
+	double dc = max(aver - 0.35, 0.1);
+	cout << "预估的距离dc为 " << dc << endl;
+	dataana << "预估的距离dc " << dc << endl;
 
 	for (int i = 0; i < N - 1; i++)
 	{
@@ -166,8 +166,8 @@ double Cluster::getaverNeighrate(const Mat &dist)
 	}
 	double percents = 100.0*nneigh / (double)(N*(N - 1) / 2);
 	cout << "邻居率为 " << percents << " %." << endl;
-	//data_analyse << "邻居率 " << percents << endl;
-
+	dataana << "邻居率 " << percents << endl;
+	dataana.close();
 	return percents;
 }
 
@@ -303,13 +303,15 @@ void Cluster::calculateDelta(cv::Mat& dist, vector<double>& rho, vector<double>&
 
 void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 {
+	ofstream dataana("data.txt", ios::app);
+
 	assert(dist.rows == dist.cols);
 	int Num = dist.rows;
 	double percent = getaverNeighrate(dist); //指定平均邻居数的百分比
 	//percent = 5.0;
 	double dc = getDc(dist, percent);
-	cout << "根据邻居率计算的dc为：" << dc << endl;
-	//data_analyse << "根据邻居率计算的dc" << dc << endl;
+	cout << "根据邻居率计算的dc " << dc << endl;
+	dataana << "根据邻居率计算的dc " << dc << endl;
 	vector<double> rho(Num);
 	calculateRho(dist, dc, rho);
 
@@ -364,7 +366,7 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 	//double rhomin = rho_sorted[rho_sorted.size()*max((100 - percent * 3), 10.0) / 100];  //指定rhomin，和deltamin
 	//double deltamin = delta_sort[ordrho.size()*(min(percent * 2, 70.0)) / 100];	double rhomin = rho_sorted[rho_sorted.size()*max((100 - percent * 3), 10.0) / 100];  //指定rhomin，和deltamin
 	double rhomin = rho_sorted[0] / 8;
-	double deltamin = maxdel/4;
+	double deltamin = maxdel / 4;
 	int NCLUST = 0;
 	vector<int> cl(Num);  //初始化cl[Num]，全为-1
 	int bint = -1;
@@ -379,8 +381,10 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 	rhodelta << rhomin << " " << deltamin << endl;
 	rhodelta.close();
 
-	//data_analyse << "rhomin " << rhomin << endl;
-	//data_analyse << "deltamin " << deltamin << endl;
+	dataana << "rhomin " << rhomin << endl;
+	dataana << "deltamin " << deltamin << endl;
+	dataana << "rhomin_max " << rho_sorted[0] << endl;
+	dataana << "delta_max " << maxdel << endl;
 
 	//for (int i = 0; i < maxdifId; i++)
 	//{
@@ -399,7 +403,7 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 	}
 	//已找出所有的聚类中心。
 	cout << "NUMBER OF CLUSTERS : " << NCLUST << endl;
-	//data_analyse << "聚类中心总数 " << NCLUST << endl;
+	dataana << "聚类中心总数 " << NCLUST << endl;
 	/*开始进行所有样点的分配，归入所有的中心*/
 	cout << "Performing assignation" << endl;
 	for (int i = 0; i < Num; i++)
@@ -466,7 +470,7 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 		int ling = 0;
 		fillval(nc, ling);
 		fillval(nh, ling);
-		//data_analyse << "类簇大小 ";
+		dataana << "类簇大小 ";
 		for (int i = 0; i < NCLUST; i++)
 		{
 			int ncc = 0;
@@ -487,9 +491,9 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 			nh[i] = nhh;
 			cout << "CLUSTER : " << i << "  CENTER: " << icl[i] << " ELEMENT: " << nc[i]
 				<< "  CORE: " << nh[i] << "  HALO: " << nc[i] - nh[i] << endl;
-			//data_analyse << nc[i] << " ";
+			dataana << nc[i] << " ";
 		}
-		//data_analyse << endl;
+		dataana << endl;
 		for (int i = 0; i < NCLUST; i++)
 		{
 			allclust[i].classid = i;
@@ -512,7 +516,7 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 		ofstream MNsimi("MNsimi.txt");
 		vector<cluster> onepicclust;
 		int single_class_element_size = 3; //可由已聚出类簇的尺寸进行估量。
-		///data_analyse << "单类标准（小于等于） " << single_class_element_size << endl;
+		dataana << "单类标准（小于等于） " << single_class_element_size << endl;
 
 		for (int i = 0; i < NCLUST; i++)
 		{
@@ -523,10 +527,10 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 		}
 		int Monepiccluster = onepicclust.size();
 		cout << " 单类个数" << Monepiccluster << endl;
-		//data_analyse << "单类数量 " << Monepiccluster << endl;
+		dataana << "单类数量 " << Monepiccluster << endl;
 
 		double merge_th = 0.7;
-		//data_analyse << "单类合并标准 " << merge_th << endl;
+		dataana << "单类合并标准 " << merge_th << endl;
 
 		int merge_time = 0;
 		for (int i = 0; i < Monepiccluster; i++)
@@ -570,7 +574,7 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 			MNsimi << "\n";
 		}
 		MNsimi.close();
-		//data_analyse << "单类合并次数 " << merge_time << endl;
+		dataana << "单类合并次数 " << merge_time << endl;
 
 		ofstream dist_center_ij("dist_center_ij.txt");
 
@@ -613,7 +617,8 @@ void Cluster::fastClust(cv::Mat &dist, vector<datapoint>& clustResult)
 			clustResult.push_back(cresult);
 		}
 	}
-
+	
+	dataana.close();
 
 }
 

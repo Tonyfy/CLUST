@@ -8,8 +8,9 @@ class_count=0      #当前产生了多少个类别
 image_count=0      #当前总共有多少个人脸参与聚类
 
 imgcube=[]
-
+classname=[]
 for folder in os.listdir(path):
+    classname.append(folder)
     class_count=class_count+1
     #print path,'--',folder
     #print os.path.join(path,folder)
@@ -32,18 +33,29 @@ TP=0
 TN=0
 FP=0
 FN=0
-
+clsid=0
 for cla in imgcube:
+   # print cla
     len_of_the_cla=len(cla)
     if len_of_the_cla>1:
-         for i in range(len_of_the_cla):
-             idi=cla[i].split('-')[0].split('_')[-1]
-             for j in range(i+1,len_of_the_cla):
-                 idj=cla[j].split('-')[0].split('_')[-1]
-                 if idi==idj:
-                     TP=TP+1
-                 else:
-                     FP=FP+1
+        TPi=0
+        FPi=0
+        for i in range(len_of_the_cla):
+            idi=cla[i].split('-')[0].split('_')[-1]
+            for j in range(i+1,len_of_the_cla):
+                idj=cla[j].split('-')[0].split('_')[-1]
+                if idi==idj:
+                    TP=TP+1
+                    TPi=TPi+1
+                else:
+                    FP=FP+1
+                    FPi=FPi+1 
+        modclassname=classname[clsid]+"---TP~"+str(TPi)+"---FP~"+str(FPi)
+        #os.chdir(path)
+        print os.path.join(path,classname[clsid])
+        print os.path.join(path,modclassname)
+        os.rename(os.path.join(path,classname[clsid]),os.path.join(path,modclassname))
+    clsid=clsid+1
 
 len_of_cube=len(imgcube)
 for m in range(len_of_cube):
